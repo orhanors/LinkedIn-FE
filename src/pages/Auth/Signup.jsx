@@ -78,6 +78,8 @@ const Login = () => {
 				});
 			} else {
 				setFormData({
+					name: "",
+					surname: "",
 					username: "",
 					email: "",
 					password: "",
