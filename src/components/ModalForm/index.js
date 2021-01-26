@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
+import { editCurrentUser } from "../../api/profile";
 class ModalForm extends React.Component {
 	state = {
 		info: this.props.myProfile,
@@ -22,29 +23,32 @@ class ModalForm extends React.Component {
 
 	changeInfo = async (e) => {
 		e.preventDefault();
-		try {
-			const response = await fetch(
-				"https://striveschool-api.herokuapp.com/api/profile/",
-				{
-					method: "PUT",
-					body: JSON.stringify(this.state.info),
+		const {
+			name,
+			surname,
+			email,
+			username,
+			bio,
+			title,
+			area,
+		} = this.state.info;
 
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: process.env.REACT_APP_TOKEN,
-					},
-				}
-			);
-
-			if (response.ok) {
-				alert("UPDATED SUCCESFULLY");
-				this.props.submitCounter();
-				this.props.hide();
-			} else {
-				const error = await response.json();
-				console.log(error);
-			}
-		} catch (error) {
+		const data = {
+			name,
+			surname,
+			email,
+			username,
+			bio,
+			title,
+			area,
+		};
+		const response = await editCurrentUser(data);
+		if (response.ok) {
+			alert("UPDATED SUCCESFULLY");
+			this.props.submitCounter();
+			this.props.hide();
+		} else {
+			const error = response;
 			console.log(error);
 		}
 	};

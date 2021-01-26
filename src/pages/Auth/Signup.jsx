@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { Form, Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
 import equals from "validator/lib/equals";
 import isEmpty from "validator/lib/isEmpty";
-import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { signup } from "../../api/auth";
-
 import "./auth.scss";
-
-function Signup(props) {
+const Login = () => {
 	const [formData, setFormData] = useState({
 		username: "",
 		name: "",
@@ -19,7 +15,6 @@ function Signup(props) {
 		password2: "",
 		successMsg: false,
 		errorMsg: false,
-		loading: false,
 	});
 
 	const {
@@ -31,7 +26,6 @@ function Signup(props) {
 		password2,
 		successMsg,
 		errorMsg,
-		loading,
 	} = formData;
 
 	const handleChange = (e) => {
@@ -89,114 +83,119 @@ function Signup(props) {
 					password: "",
 					password2: "",
 					errorMsg: "",
-					successMsg: "Successfully created",
+					successMsg: "Successfully created! Please login",
 				});
 			}
 		}
 	};
-	const showSignupFrom = () => {
+
+	const showSignupForm = () => {
 		return (
-			<Form onSubmit={handleSubmit} noValidate>
-				<Form.Group controlId='formGroupText'>
-					<Form.Label>Name</Form.Label>
-					<Form.Control
-						onChange={handleChange}
+			<div class='d-flex flex-column mt-4'>
+				<div className='login-input-wrap mb-4'>
+					<p className='login-label mb-0'>Name</p>
+					<input
+						type='text'
 						name='name'
-						value={name}
-						type='text'
-						placeholder='Name'
-					/>
-				</Form.Group>
-
-				<Form.Group controlId='formGroupText2'>
-					<Form.Label>Surname</Form.Label>
-					<Form.Control
 						onChange={handleChange}
+						value={name}></input>
+				</div>
+
+				<div className='login-input-wrap mb-4'>
+					<p className='login-label mb-0'>Surname</p>
+					<input
+						type='text'
 						name='surname'
-						value={surname}
-						type='text'
-						placeholder='Surname'
-					/>
-				</Form.Group>
-
-				<Form.Group controlId='formGroupText3'>
-					<Form.Label>Username</Form.Label>
-					<Form.Control
 						onChange={handleChange}
+						value={surname}></input>
+				</div>
+
+				<div className='login-input-wrap mb-4'>
+					<p className='login-label mb-0'>Username</p>
+					<input
+						type='text'
 						name='username'
-						value={username}
-						type='text'
-						placeholder='Username'
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupEmail'>
-					<Form.Label>Email</Form.Label>
-					<Form.Control
 						onChange={handleChange}
-						name='email'
-						value={email}
+						value={username}></input>
+				</div>
+				<div className='login-input-wrap mb-4'>
+					<p className='login-label mb-0'>Email</p>
+					<input
 						type='email'
-						placeholder='example@xyz.com'
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupPassword'>
-					<Form.Label>Password</Form.Label>
-
-					<Form.Control
+						name='email'
 						onChange={handleChange}
+						value={email}></input>
+				</div>
+				<div className='login-input-wrap mb-2'>
+					<p className='login-label mb-0'>Password</p>
+					<input
+						type='password'
 						name='password'
-						value={password}
-						type='password'
-						placeholder='Password'
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupPassword2'>
-					<Form.Label>Confirm Password</Form.Label>
-					<Form.Control
 						onChange={handleChange}
-						name='password2'
-						value={password2}
+						value={password}></input>
+				</div>
+
+				<div className='login-input-wrap mb-2'>
+					<p className='login-label mb-0'>Confirm Password</p>
+					<input
 						type='password'
-						placeholder='Confirm Password'
-					/>
-				</Form.Group>
-				<button className='mb-2 auth-btn' type='submit'>
-					SignUp
+						name='password2'
+						onChange={handleChange}
+						value={password2}></input>
+				</div>
+
+				{errorMsg && (
+					<small className='mb-2 mt-0 text-danger text-center'>
+						{errorMsg}
+					</small>
+				)}
+
+				{successMsg && (
+					<small className='mb-2 mt-0 text-success text-center'>
+						{successMsg}
+					</small>
+				)}
+				<hr />
+
+				<button onClick={handleSubmit} className='sign-in-btn'>
+					Sign up
 				</button>
-			</Form>
+
+				<div className='text-center'>
+					<p className='mt-2'>
+						Already have an account?{" "}
+						<Link to='/auth/login' className='font-weight-bold'>
+							Login
+						</Link>
+					</p>
+				</div>
+			</div>
 		);
 	};
 
 	return (
-		<div className='signup-form'>
-			<Container>
-				<h3 className='text-center'>Signup</h3>
-
-				<Row>
-					<Col md={12}>{showSignupFrom()}</Col>
-					{errorMsg && (
-						<Col md={12} className='mt-3'>
-							{showErrorMsg(errorMsg)}
-						</Col>
-					)}
-					{successMsg && (
-						<Col md={12} className='mt-3'>
-							{showSuccessMsg(successMsg)}
-						</Col>
-					)}
-					<Col md={12}>
-						<p className='sub-info'>
-							Already Have an account?
-							<span>
-								{"  "}
-								<Link to='/auth/login'>Login</Link>
-							</span>
+		<div
+			id='login-main-container'
+			className='d-flex flex-column justify-content-center align-items-center'>
+			<div>
+				<div className='login-top-container d-flex align-items-center justify-content-start'>
+					<div className='login-title d-flex mb-3'>
+						<h4>Linked</h4>
+						<i className='fab fa-linkedin ml-1'></i>
+					</div>
+				</div>
+				<div className='signup-content-container mb-5'>
+					<div className='mb-4'>
+						<h2 className='mb-1'>Sign up</h2>
+						<p className='mb-0'>
+							Become a member of LinkedIn family
 						</p>
-					</Col>
-				</Row>
-			</Container>
+					</div>
+					{showSignupForm()}
+				</div>
+			</div>
 		</div>
 	);
-}
+};
 
-export default Signup;
+export default Login;

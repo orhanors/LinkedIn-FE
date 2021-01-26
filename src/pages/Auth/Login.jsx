@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Form, Container, Row, Col } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
 import isEmpty from "validator/lib/isEmpty";
-import { showErrorMsg } from "../../helpers/message";
 import { signin } from "../../api/auth";
 import { isAuthenticated, setAuth } from "../../helpers/auth";
 import "./auth.scss";
-
-function Login(props) {
+function Login() {
 	let history = useHistory();
 
 	//If the user is logged in, dont redirect him to signin page
@@ -22,10 +19,8 @@ function Login(props) {
 		email: "",
 		password: "",
 		errorMsg: false,
-		loading: false,
 	});
-
-	const { email, password, errorMsg, loading } = formData;
+	const { email, password, errorMsg } = formData;
 
 	const handleChange = (e) => {
 		setFormData({
@@ -36,8 +31,6 @@ function Login(props) {
 		});
 	};
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-
 		//Validate inputs
 
 		if (isEmpty(email) || isEmpty(password)) {
@@ -61,7 +54,7 @@ function Login(props) {
 
 					if (isAuthenticated()) {
 						//redirect admin page
-						console.log("admin page");
+
 						history.push("/");
 					}
 				})
@@ -70,68 +63,79 @@ function Login(props) {
 					setFormData({
 						...formData,
 						errorMsg:
-							err?.response?.data?.errorMessage ||
+							err?.response?.data?.errors ||
 							"Something went wrong",
 					});
 				});
 		}
 	};
-	const showSignupFrom = () => {
+
+	const showLoginForm = () => {
 		return (
-			<Form onSubmit={handleSubmit} noValidate>
-				<Form.Group controlId='formGroupEmail'>
-					<Form.Label>Email</Form.Label>
-					<Form.Control
-						onChange={handleChange}
-						name='email'
-						value={email}
+			<div class='d-flex flex-column'>
+				<div className='login-input-wrap mb-4'>
+					<p className='login-label mb-0'>Email</p>
+					<input
 						type='email'
-						placeholder='example@xyz.com'
-					/>
-				</Form.Group>
-				<Form.Group controlId='formGroupPassword'>
-					<Form.Label>Password</Form.Label>
-
-					<Form.Control
+						name='email'
 						onChange={handleChange}
-						name='password'
-						value={password}
+						value={email}></input>
+				</div>
+				<div className='login-input-wrap mb-2'>
+					<p className='login-label mb-0'>Password</p>
+					<input
 						type='password'
-						placeholder='Password'
-					/>
-				</Form.Group>
-
-				<button className='auth-btn mb-2' type='submit'>
-					SignIn
+						name='password'
+						onChange={handleChange}
+						value={password}></input>
+				</div>
+				<Link
+					className='forgot-password mb-4'
+					to='/login/forgotpassword'>
+					Forgot Password?
+				</Link>
+				{errorMsg && (
+					<small className='mb-2 mt-0 text-danger text-center'>
+						{errorMsg}
+					</small>
+				)}
+				<button onClick={handleSubmit} className='sign-in-btn'>
+					Sign in
 				</button>
-			</Form>
+			</div>
 		);
 	};
-
 	return (
-		<div className='signup-form'>
-			<Container>
-				<h3 className='text-center'>Login</h3>
-				<Row>
-					<Col md={12}>{showSignupFrom()}</Col>
-					{errorMsg && (
-						<Col md={12} className='mt-3'>
-							{showErrorMsg(errorMsg)}
-						</Col>
-					)}
-
-					<Col md={12}>
-						<p className='sub-info'>
-							Don't have an account?
-							<span>
-								{"  "}
-								<Link to='/auth/signup'>SingUp</Link>
-							</span>
+		<div
+			id='login-main-container'
+			className='d-flex flex-column justify-content-center align-items-center'>
+			<div>
+				<div className='login-top-container d-flex align-items-center justify-content-start'>
+					<div className='login-title d-flex mb-3'>
+						<h4>Linked</h4>
+						<i className='fab fa-linkedin ml-1'></i>
+					</div>
+				</div>
+				<div className='login-content-container mb-5'>
+					<div className='mb-4'>
+						<h2 className='mb-1'>Sign in</h2>
+						<p className='mb-0'>
+							Stay updated on your professional world
 						</p>
-					</Col>
-				</Row>
-			</Container>
+					</div>
+					{showLoginForm()}
+				</div>
+				<div className='text-center'>
+					<p>
+						New to LinkedIn?{" "}
+						<Link to='/auth/signup' className='font-weight-bold'>
+							Join now
+						</Link>
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 }
+
 export default Login;

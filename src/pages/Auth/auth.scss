@@ -1,25 +1,76 @@
-.signup-form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 2%;
-	padding: 0% 30% 0% 30%;
+#login-main-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #fff;
+	z-index: 999999999;
+}
 
-	.auth-btn {
-		background-color: black !important;
-		width: 100%;
-		color: white;
-		font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-		font-weight: bold;
-	}
+#login-main-container .login-title {
+	color: rgb(0, 115, 177);
+}
 
-	.sub-info {
-		color: rgb(85, 84, 84);
+#login-main-container h4 {
+	font-weight: bold;
+	font-size: 1.9rem;
+}
 
-		a {
-			color: black;
-			text-decoration: underline;
-			font-weight: bold;
-		}
-	}
+#login-main-container .fa-linkedin {
+	font-size: 2.3rem;
+}
+
+#login-main-container .login-content-container {
+	background-color: #fff;
+
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px 0px;
+	padding: 30px;
+	border-radius: 0.6rem;
+}
+
+#login-main-container .signup-content-container {
+	background-color: #fff;
+	margin-top: 5rem;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px 0px;
+	padding: 30px;
+	border-radius: 0.6rem;
+}
+
+#login-main-container .login-input-wrap {
+	position: relative;
+}
+
+#login-main-container .login-label {
+	position: absolute;
+	left: 10px;
+	top: 4px;
+	font-size: 0.8rem;
+}
+
+#login-main-container input {
+	border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+	padding: 25px 10px 4px 10px;
+	width: 100%;
+}
+
+#login-main-container .forgot-password {
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
+#login-main-container .sign-in-btn {
+	border: none;
+	border-radius: 26px;
+	color: #fff;
+	font-weight: bold;
+	background-color: rgb(10, 102, 194);
+	height: 52px;
+	width: 352px;
+	transition: background-color 0.25s ease;
+}
+
+#login-main-container .sign-in-btn:hover {
+	background-color: rgb(0, 65, 130);
 }

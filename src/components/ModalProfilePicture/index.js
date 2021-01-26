@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
-
+import { addProfileImage } from "../../api/profile";
 export default class ModalProfilePicture extends Component {
 	state = {
 		post: null,
@@ -15,28 +15,15 @@ export default class ModalProfilePicture extends Component {
 	postImage = async () => {
 		//   const url = "https://striveschool-api.herokuapp.com/api/profile/{userId}/picture"
 
-		try {
-			const response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/${this.props.id}/picture`,
-				{
-					method: "POST",
-					body: this.state.post,
-					headers: {
-						Authorization: process.env.REACT_APP_TOKEN,
-					},
-				}
-			);
-			if (response.ok) {
-				console.log("profile image posted succesfully");
-				this.props.submitCounter();
-				this.props.hidePictureModal();
-			} else {
-				const error = await response.json();
-				console.log(error);
-				<Alert variant='danger'>Something went wrong</Alert>;
-			}
-		} catch (error) {
+		const response = await addProfileImage(this.state.post);
+		if (response.data) {
+			console.log("profile image posted succesfully");
+			this.props.submitCounter();
+			this.props.hidePictureModal();
+		} else {
+			const error = response.errors;
 			console.log(error);
+			<Alert variant='danger'>Something went wrong</Alert>;
 		}
 	};
 
