@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Modal, Form, Button, Alert } from "react-bootstrap";
-import { postExperience } from "../../api/experience";
+import {
+	postExperience,
+	editExperience,
+	addExperienceImage,
+} from "../../api/experience";
 export default class ModalExperience extends Component {
 	state = {
 		experience: {
@@ -30,29 +34,14 @@ export default class ModalExperience extends Component {
 	};
 
 	fetchPostImage = async (id) => {
-		try {
-			let response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/${this.props.id}/experiences/${id}/picture`,
-				{
-					method: "POST",
-					body: this.state.post,
-
-					headers: {
-						//"Content-Type": "application/json",
-						Authorization: process.env.REACT_APP_TOKEN,
-					},
-				}
-			);
-			if (response.ok) {
-				console.log("OK");
-				this.props.submitExpCounter();
-			} else {
-				const error = await response.json();
-				console.log(error);
-				<Alert variant='danger'>Something went wrong</Alert>;
-			}
-		} catch (error) {
+		const response = await addExperienceImage(this.state.post, id);
+		if (response.data) {
+			console.log("OK");
+			this.props.submitExpCounter();
+		} else {
+			const error = response.errors;
 			console.log(error);
+			<Alert variant='danger'>Something went wrong</Alert>;
 		}
 	};
 
@@ -86,26 +75,19 @@ export default class ModalExperience extends Component {
 		e.preventDefault();
 		try {
 			let response;
-			//TODO ADD NEW CRUD HERE
-			if (this.props.editExp.experience._id) {
-				response = await fetch(
-					`https://striveschool-api.herokuapp.com/api/profile/${this.props.id}/experiences/${this.props.editExp.experience._id}`,
-					{
-						method: "PUT",
-						body: JSON.stringify(this.state.experience),
 
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: process.env.REACT_APP_TOKEN,
-						},
-					}
+			if (this.props.editExp.experience._id) {
+				response = await editExperience(
+					this.state.experience,
+					this.props.editExp.experience._id
 				);
+				console.log("edit resp....", response);
 			} else {
 				response = await postExperience(this.state.experience);
 			}
 
 			if (response.data) {
-				const data = response;
+				const data = response.data;
 				console.log("exp data", data);
 
 				alert(

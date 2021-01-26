@@ -17,7 +17,7 @@ export const getAllUsers = async () => {
 		return response.data;
 	} catch (error) {
 		console.log("Get all users error: ", error);
-		return error.response.data;
+		return error?.response?.data;
 	}
 };
 export const getCurrentUser = async () => {
@@ -29,7 +29,7 @@ export const getCurrentUser = async () => {
 		return response.data;
 	} catch (error) {
 		console.log("Get current user error: ", error);
-		return error.response.data;
+		return error?.response?.data;
 	}
 };
 
