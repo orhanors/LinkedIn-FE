@@ -25,85 +25,40 @@ class Profile extends React.Component {
 		loadingExp: true,
 	};
 
-	fetchProfile = async () => {
+	getUser = async () => {
 		this.setState({ loading: true });
-
-		const url =
-			this.props.match.params.id === "me"
-				? "https://striveschool-api.herokuapp.com/api/profile/me"
-				: "https://striveschool-api.herokuapp.com/api/profile/" +
-				  this.props.match.params.id;
-		try {
-			let response = await fetch(url, {
-				headers: {
-					Authorization: process.env.REACT_APP_TOKEN,
-				},
+		const response = await getCurrentUser();
+		if (!response.errors) {
+			this.setState({
+				myProfile: response.data,
+				MyExperience: response.data.experiences,
+				loading: false,
+				loadingExp: false,
 			});
-
-			let myProfile = await response.json();
-			console.log(myProfile);
-
-			if (response.ok) {
-				this.fetchExperience(myProfile._id);
-				this.setState({ myProfile, loading: false });
-			} else {
-				this.setState({ loading: false });
-				<Alert variant='danger'>Something went wrong</Alert>;
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	fetchExperience = async (id) => {
-		this.setState({ loadingExp: true });
-		try {
-			let response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`,
-				{
-					headers: {
-						Authorization: process.env.REACT_APP_TOKEN,
-					},
-				}
-			);
-			let MyExperience = await response.json();
-			console.log("here experience", MyExperience);
-			MyExperience = MyExperience.reverse();
-
-			if (response.ok) {
-				this.setState({ MyExperience, loadingExp: false });
-			} else {
-				this.setState({ loadingExp: false });
-				<Alert variant='danger'>Something went wrong</Alert>;
-			}
-		} catch (err) {
-			console.log(err);
 		}
 	};
 
 	componentDidMount = () => {
-		if (this.props.match.params.id === "me") {
+		if (this.props.match.params.id == "me") {
 			this.props.changeMe();
 		} else {
 			this.props.changeNotMe();
 		}
-		this.fetchProfile();
+		this.getUser();
 	};
 
 	componentDidUpdate = (previousProps, previousState) => {
 		if (previousState.submitCounter !== this.state.submitCounter) {
-			this.fetchProfile();
+			this.getUser();
 		}
 
-		if (previousState.submitExpCounter !== this.state.submitExpCounter) {
-			this.fetchExperience(this.state.myProfile._id);
-		}
 		if (previousProps.match.params.id !== this.props.match.params.id) {
 			if (this.props.match.params.id === "me") {
 				this.props.changeMe();
 			} else {
 				this.props.changeNotMe();
 			}
-			this.fetchProfile();
+			this.getUser();
 		}
 	};
 

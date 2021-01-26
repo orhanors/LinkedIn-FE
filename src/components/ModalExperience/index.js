@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Form, Button, Alert } from "react-bootstrap";
-
+import { postExperience } from "../../api/experience";
 export default class ModalExperience extends Component {
 	state = {
 		experience: {
@@ -86,6 +86,7 @@ export default class ModalExperience extends Component {
 		e.preventDefault();
 		try {
 			let response;
+			//TODO ADD NEW CRUD HERE
 			if (this.props.editExp.experience._id) {
 				response = await fetch(
 					`https://striveschool-api.herokuapp.com/api/profile/${this.props.id}/experiences/${this.props.editExp.experience._id}`,
@@ -100,22 +101,12 @@ export default class ModalExperience extends Component {
 					}
 				);
 			} else {
-				response = await fetch(
-					`https://striveschool-api.herokuapp.com/api/profile/${this.props.id}/experiences`,
-					{
-						method: "POST",
-						body: JSON.stringify(this.state.experience),
-
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: process.env.REACT_APP_TOKEN,
-						},
-					}
-				);
+				response = await postExperience(this.state.experience);
 			}
 
-			if (response.ok) {
-				const data = await response.json();
+			if (response.data) {
+				const data = response;
+				console.log("exp data", data);
 
 				alert(
 					`Experience ${

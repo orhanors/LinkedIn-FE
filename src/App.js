@@ -11,7 +11,7 @@ import Profile from "./pages/Profile";
 import "./App.css";
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 function App() {
-	const [me, setMe] = React.useState(true);
+	const [me, setMe] = React.useState(null);
 	return (
 		<div className='App'>
 			<Router>
