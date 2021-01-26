@@ -1,0 +1,42 @@
+/* Search Styling */
+
+.search-container {
+	border-radius: 6px;
+	position: fixed;
+	top: 68px;
+	right: 172px;
+	z-index: 99;
+	width: 480px;
+	background-color: #141414e0;
+	max-height: 800px;
+	overflow: hidden scroll;
+}
+
+.search-container h6,
+.search-container span {
+	word-break: break-all;
+}
+
+.search-image {
+	background-size: cover !important;
+	background-position: center !important;
+	height: 100px;
+	width: 70px;
+}
+
+.search-item {
+	background-color: #0c0c0c48;
+	border-radius: 4px;
+	border-bottom: 3px solid #0c0c0c48;
+	cursor: pointer;
+	transition: background-color 0.15s ease-in-out, border 0.15s ease-in-out;
+}
+
+.search-item:hover {
+	background-color: #ff56592d;
+	border-bottom: 3px solid #ff5659;
+}
+
+.search-item small {
+	color: #c2c2c28c;
+}

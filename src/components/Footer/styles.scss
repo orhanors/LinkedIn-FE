@@ -1,0 +1,58 @@
+.footercontainer {
+	border-top: 0.1px solid #dfdfdf;
+}
+.footercontainer li {
+	list-style-type: none;
+	font-size: 12px;
+	font-weight: 500;
+	color: #616160 !important;
+	text-decoration: none;
+}
+a:visited {
+	color: #57687a !important;
+}
+a:hover {
+	color: #0073b1 !important;
+}
+a:active {
+	color: #5667a7;
+}
+/* a:link{
+      color:#57687a !important;
+  } */
+.dropdownitems {
+	font-size: 12px;
+	color: black;
+	font-weight: 500;
+}
+.dropdownitems:hover {
+	background-color: #f1eee3;
+}
+svg {
+	color: #616160;
+}
+.helpsection a {
+	font-size: 14px;
+	font-weight: 600;
+}
+.helpsection p {
+	font-size: 12px;
+	text-align: left;
+}
+#input-group-dropdown-down {
+	width: 300px;
+	color: #000000e6;
+	border: 2px solid #000000e6 !important;
+	border-radius: 5px !important;
+	padding-left: 1;
+	background-color: transparent;
+	font-size: 12px;
+	text-align: left;
+	margin-top: 0;
+}
+.dropdown-toggle::after {
+	margin-left: 150px;
+}
+label {
+	font-size: 12px;
+}

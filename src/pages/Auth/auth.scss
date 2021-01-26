@@ -1,0 +1,25 @@
+.signup-form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 2%;
+	padding: 0% 30% 0% 30%;
+
+	.auth-btn {
+		background-color: black !important;
+		width: 100%;
+		color: white;
+		font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+		font-weight: bold;
+	}
+
+	.sub-info {
+		color: rgb(85, 84, 84);
+
+		a {
+			color: black;
+			text-decoration: underline;
+			font-weight: bold;
+		}
+	}
+}
