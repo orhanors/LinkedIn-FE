@@ -49,58 +49,58 @@ class Feed extends React.Component {
     }
   }
 
-  populateFeed = async () => {
-    const posts = await fetchPosts()
-    console.log(posts)
-    if (posts.data.length > 0) {
-      let meProfile = posts.data.filter(
-        // (post) => post.username === process.env.REACT_APP_USER
-        (post) => post.username === this.state.userName
-      )
-      this.props.fillMeProflie(meProfile[0])
-      this.setState({ posts: posts.data.reverse(), loading: false })
-      this.props.changeCounter()
-    }
-    //   let meProfile = this.state.posts.filter(
-    //     (post) => post.user.username === process.env.REACT_APP_USER
-    //   )
-    //   this.props.fillMeProflie(meProfile[0])
-  }
-
-  //   fetchPosts = async () => {
-  //     this.setState({ loading: true })
-  //     try {
-  //       let response = await fetch(process.env.REACT_APP_BE_URL + "/posts")
-  //       let postsObj = await response.json()
-  //       let posts = postsObj.data
-  //       posts = posts.reverse()
-  //       let meProfile = posts.filter(
+  //   populateFeed = async () => {
+  //     const posts = await fetchPosts()
+  //     console.log(posts)
+  //     if (posts.data.length > 0) {
+  //       let meProfile = posts.data.filter(
   //         // (post) => post.username === process.env.REACT_APP_USER
   //         (post) => post.username === this.state.userName
   //       )
-
-  //       console.log("posts", posts)
-  //       if (response.ok) {
-  //         this.setState({ posts, loading: false })
-  //         this.props.fillMeProflie(meProfile[0])
-  //       } else {
-  //         ;<Alert variant="danger">Something went wrong!</Alert>
-  //         this.setState({ loading: false })
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
+  //       this.props.fillMeProflie(meProfile[0])
+  //       this.setState({ posts: posts.data.reverse(), loading: false })
+  //       this.props.changeCounter()
   //     }
+  //     //   let meProfile = this.state.posts.filter(
+  //     //     (post) => post.user.username === process.env.REACT_APP_USER
+  //     //   )
+  //     //   this.props.fillMeProflie(meProfile[0])
   //   }
 
-  //   componentDidUpdate = (previousProps) => {
-  //     if (previousProps.feedCounter !== this.props.feedCounter) {
-  //       this.populateFeed()
-  //       console.log("Chaned")
-  //     }
-  //   }
+  fetchPosts = async () => {
+    this.setState({ loading: true })
+    try {
+      let response = await fetch(process.env.REACT_APP_BE_URL + "/posts")
+      let postsObj = await response.json()
+      let posts = postsObj.data
+      posts = posts.reverse()
+      let meProfile = posts.filter(
+        // (post) => post.username === process.env.REACT_APP_USER
+        (post) => post.username === this.state.userName
+      )
+
+      console.log("posts", posts)
+      if (response.ok) {
+        this.setState({ posts, loading: false })
+        this.props.fillMeProflie(meProfile[0])
+      } else {
+        ;<Alert variant="danger">Something went wrong!</Alert>
+        this.setState({ loading: false })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  componentDidUpdate = (previousProps) => {
+    if (previousProps.feedCounter !== this.props.feedCounter) {
+      this.populateFeed()
+      console.log("Chaned")
+    }
+  }
 
   componentDidMount = () => {
-    this.populateFeed()
+    this.fetchPosts()
   }
 
   render() {

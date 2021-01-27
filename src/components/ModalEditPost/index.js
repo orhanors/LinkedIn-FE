@@ -4,6 +4,8 @@ import { Modal, Form, Col, Button, Alert } from "react-bootstrap"
 class ModalEditPost extends React.Component {
   state = {
     postEdit: {
+      user: this.props.post._id,
+      username: this.props.post.username,
       text: "",
     },
     post: null,
@@ -92,7 +94,7 @@ class ModalEditPost extends React.Component {
           headers: {
             "Content-Type": "application/json",
             // Authorization: process.env.REACT_APP_TOKEN,
-            "Access-Control-Allow-Origin": "*",
+            // "Access-Control-Allow-Origin": "*",
           },
         }
       )
