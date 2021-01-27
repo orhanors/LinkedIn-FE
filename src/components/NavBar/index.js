@@ -15,7 +15,7 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 
 import HomeIcon from "@material-ui/icons/Home";
-import { HiSearch } from "react-icons/hi";
+//import { HiSearch } from "react-icons/hi";
 import WorkIcon from "@material-ui/icons/Work";
 import SmsIcon from "@material-ui/icons/Sms";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -24,7 +24,7 @@ import { CgMenuGridR } from "react-icons/cg";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import "./styles.scss";
 import { Link, withRouter } from "react-router-dom";
-import "./search.scss";
+//import "./search.scss";
 import { isAuthenticated, logout } from "../../helpers/auth";
 
 class NavBar extends React.Component {
@@ -86,6 +86,27 @@ class NavBar extends React.Component {
 			console.log(error);
 		}
 	};
+/* 
+  	searchStringHandler = (e) => {
+    	if (e.keyCode === 13 || e.key === "Enter") {
+      		this.props.showSearchResult(this.state.searchString);
+    	} else {
+      		this.setState({ searchString: e.currentTarget.value });
+    	}
+	}; 
+	  
+	 _______________
+	 
+	 <FormControl
+                className="mr-3"
+                placeholder="Search and press enter"
+                aria-label="search"
+                aria-describedby="basic-addon1"
+                onKeyDown={this.searchStringHandler}
+                onChange={this.searchStringHandler}
+                value={this.state.searchString}
+              />*/
+
 	componentDidMount = () => {
 		this.fetchProfile();
 		this.fetchusers();
@@ -133,7 +154,15 @@ class NavBar extends React.Component {
 					</Link>
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
-						<Form inline>
+
+
+
+
+
+
+
+
+						{/*   <Form inline>
 							<InputGroup style={{ width: "240px" }}>
 								<Typeahead
 									labelKey={(option) => `${option.username}`}
@@ -147,13 +176,12 @@ class NavBar extends React.Component {
 										index
 									) => {
 										// here design your user display
-
 										return (
 											<>
 												<div className='search-item d-flex align-items-center justify-content-start py-3 px-3 mb-2'>
 													<div></div>
 													<div className='ml-3'>
-														{/* <link to={`/profile/${option._id}`}> */}{" "}
+														{/* <link to={`/profile/${option._id}`}> {" "}
 														<p
 															className='mb-0'
 															onClick={() =>
@@ -164,7 +192,7 @@ class NavBar extends React.Component {
 															}>
 															{option.name}
 														</p>{" "}
-														{/* </link> */}
+														{/* </link> 
 														<p className='mb-0'>
 															{" "}
 															{option.surname}
@@ -199,6 +227,15 @@ class NavBar extends React.Component {
 								/>
 							</InputGroup>
 						</Form>
+								*/}
+
+
+
+
+
+
+
+
 
 						<Nav className='ml-auto'>
 							<Link to='/'>

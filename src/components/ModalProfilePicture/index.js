@@ -13,7 +13,7 @@ export default class ModalProfilePicture extends Component {
 	};
 
 	postImage = async () => {
-		//   const url = "https://striveschool-api.herokuapp.com/api/profile/{userId}/picture"
+		//    = "https://striveschool-api.herokuapp.com/api/profile/{userId}/picture"
 
 		const response = await addProfileImage(this.state.post);
 		if (response.data) {
