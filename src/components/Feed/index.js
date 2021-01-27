@@ -3,9 +3,10 @@ import { Alert, Media, Row, Col, Card, Spinner } from "react-bootstrap"
 import CommentList from "../CommentList"
 import AddComments from "../AddComment"
 import ModalEditPost from "../ModalEditPost"
-import { fetchComments } from "../../api/comments"
+import { fetchPosts } from "../../api/posts"
+import { getLocalStorage } from "../../helpers/localStorage"
 
-class Home extends React.Component {
+class Feed extends React.Component {
   state = {
     posts: [],
     // like: localStorage.getItem("likes").split(","),
@@ -16,7 +17,7 @@ class Home extends React.Component {
           " ",
     comments: [],
     loading: true,
-    userName: process.env.REACT_APP_USER,
+    userName: getLocalStorage("user").username,
     show: false,
     post: {},
     submitCounter: 0,
@@ -49,54 +50,52 @@ class Home extends React.Component {
     }
   }
 
-  populateFeed = () => {
-    fetchComments((comments) => {
-      this.setState({ posts: comments, loading: false })
-      let meProfile = this.state.posts.filter(
-        (post) => post.user.username === process.env.REACT_APP_USER
+  //   populateFeed = async () => {
+  //     const posts = await fetchPosts()
+  //     console.log(posts)
+  //     if (posts.length > 0) {
+  //       this.setState({ posts, loading: false })
+  //       this.props.changeCounter()
+  //     }
+  //     //   let meProfile = this.state.posts.filter(
+  //     //     (post) => post.user.username === process.env.REACT_APP_USER
+  //     //   )
+  //     //   this.props.fillMeProflie(meProfile[0])
+  //   }
+
+  fetchPosts = async () => {
+    this.setState({ loading: true })
+    try {
+      let response = await fetch(process.env.REACT_APP_BE_URL + "/posts")
+      let postsObj = await response.json()
+      let posts = postsObj.data
+      posts = posts.reverse()
+      let meProfile = posts.filter(
+        // (post) => post.username === process.env.REACT_APP_USER
+        (post) => post.username === this.state.userName
       )
-      this.props.fillMeProflie(meProfile[0])
-    })
+
+      console.log("posts", posts)
+      if (response.ok) {
+        this.setState({ posts, loading: false })
+        this.props.fillMeProflie(meProfile[0])
+      } else {
+        ;<Alert variant="danger">Something went wrong!</Alert>
+        this.setState({ loading: false })
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
-
-  // fetchPosts = async () => {
-  // 	this.setState({ loading: true });
-  // 	try {
-  // 		let response = await fetch(
-  // 			"https://striveschool-api.herokuapp.com/api/posts/",
-  // 			{
-  // 				headers: {
-  // 					Authorization: process.env.REACT_APP_TOKEN,
-  // 				},
-  // 			}
-  // 		);
-  // 		let posts = await response.json();
-  // 		// console.log(posts);
-  // 		posts = posts.reverse();
-  // 		let meProfile = posts.filter(
-  // 			(post) => post.user.username === process.env.REACT_APP_USER
-  // 		);
-
-  // 		console.log("posts", posts);
-  // 		if (response.ok) {
-  // 			this.setState({ posts, loading: false });
-  // 			this.props.fillMeProflie(meProfile[0]);
-  // 		} else {
-  // 			<Alert variant='danger'>Something went wrong!</Alert>;
-  // 			this.setState({ loading: false });
-  // 		}
-  // 	} catch (error) {
-  // 		console.log(error);
-  // 	}
-  // };
 
   componentDidUpdate = (previousProps) => {
     if (previousProps.feedCounter !== this.props.feedCounter) {
-      this.populateFeed()
+      this.fetchPosts()
+      console.log("Chaned")
     }
   }
   componentDidMount = () => {
-    this.populateFeed()
+    this.fetchPosts()
   }
 
   render() {
@@ -120,25 +119,23 @@ class Home extends React.Component {
                           width={64}
                           height={64}
                           className="mr-3"
-                          src={post.user.image}
+                          src={post.image}
                           alt="user"
                           style={{
                             borderRadius: "50%",
                             objectFit: "cover",
                           }}
                           onClick={() =>
-                            this.props.history.push("/profile/" + post.user._id)
+                            this.props.history.push("/profile/" + post.user)
                           }
                         />
                         <Media.Body>
                           <h5
                             onClick={() =>
-                              this.props.history.push(
-                                "/profile/" + post.user._id
-                              )
+                              this.props.history.push("/profile/" + post.user)
                             }
                           >
-                            {post.user.name} {post.user.surname}
+                            {post.username}
                           </h5>
                           <h6
                             style={{
@@ -171,7 +168,7 @@ class Home extends React.Component {
                         style={{
                           color: "#404040",
                           display:
-                            post.user.username === this.state.userName
+                            post.username === this.state.userName
                               ? "inline"
                               : "none",
                         }}
@@ -300,4 +297,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default Feed

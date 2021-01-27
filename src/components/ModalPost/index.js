@@ -9,7 +9,7 @@ import { CgMathPlus } from "react-icons/cg"
 import ImageIcon from "@material-ui/icons/Image"
 import YouTubeIcon from "@material-ui/icons/YouTube"
 import { GrNotes } from "react-icons/gr"
-import { postComment } from "../../api/comments"
+import { addPost } from "../../api/posts"
 
 export default class ModalPost extends React.Component {
   state = {
@@ -65,7 +65,7 @@ export default class ModalPost extends React.Component {
 
   handleComment = (e) => {
     e.preventDefault()
-    postComment(this.state.POSTModel, (response) => {
+    addPost(this.state.POSTModel, (response) => {
       if (response) {
         this.handleClose()
         console.log("post submitted")

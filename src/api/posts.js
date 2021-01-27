@@ -12,7 +12,7 @@ const config = {
   },
 }
 
-export const postComment = async (data, callback) => {
+export const addPost = async (data, callback) => {
   const newPost = { ...data, user: userId, username: username }
   try {
     const response = await axios.post(
@@ -29,17 +29,19 @@ export const postComment = async (data, callback) => {
       //   return response.data
     }
   } catch (error) {
-    console.log("Error in posting comment", error)
+    console.log("Error in adding posting", error)
     console.log("error response data", error.response.data)
     // return error.response.data
   }
 }
 
-export const fetchComments = async (callback) => {
+export const fetchPosts = async () => {
   try {
-    const comments = await axios.get(`${REACT_APP_BE_URL}/posts`)
-    if (comments) {
-      callback(comments)
+    const response = await axios.get(`${REACT_APP_BE_URL}/posts`, config)
+    if (response) {
+      return response.data
+    } else {
+      console.log("posts not found", response.data)
     }
   } catch (error) {}
 }
