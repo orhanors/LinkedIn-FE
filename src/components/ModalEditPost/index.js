@@ -1,11 +1,11 @@
 import React from "react"
 import { Modal, Form, Col, Button, Alert } from "react-bootstrap"
 
+import { editPost } from "../../api/posts"
+
 class ModalEditPost extends React.Component {
   state = {
     postEdit: {
-      user: this.props.post._id,
-      username: this.props.post.username,
       text: "",
     },
     post: null,
@@ -81,40 +81,51 @@ class ModalEditPost extends React.Component {
     }
   }
 
-  editFetch = async (e) => {
+  edit = async (e) => {
     e.preventDefault()
-    try {
-      console.log(this.state.postEdit)
-      let response = await fetch(
-        process.env.REACT_APP_BE_URL + "/posts/" + this.props.post._id,
-        {
-          method: "PUT",
-          body: JSON.stringify(this.state.postEdit),
-
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: process.env.REACT_APP_TOKEN,
-            // "Access-Control-Allow-Origin": "*",
-          },
-        }
-      )
-      if (response.ok) {
-        const data = await response.json()
-        this.props.feedCounter()
-        alert(`post edited SUCCESFULLY`)
-        if (this.state.post !== null) {
-          this.fetchPostImage(data._id)
-        }
-
-        this.props.onHide()
-      } else {
-        const error = await response.json()
-        console.log(error)
-      }
-    } catch (error) {
+    const response = await editPost(this.state.postEdit, this.props.post._id)
+    if (response.data) {
+      this.props.onHide()
+    } else {
+      const error = await response.json()
       console.log(error)
     }
   }
+
+  //   editFetch = async (e) => {
+  //     e.preventDefault()
+  //     try {
+  //       console.log(this.state.postEdit)
+  //       let response = await fetch(
+  //         process.env.REACT_APP_BE_URL + "/posts/" + this.props.post._id,
+  //         {
+  //           method: "PUT",
+  //           body: JSON.stringify(this.state.postEdit),
+
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             // Authorization: process.env.REACT_APP_TOKEN,
+  //             // "Access-Control-Allow-Origin": "*",
+  //           },
+  //         }
+  //       )
+  //       if (response.ok) {
+  //         const data = await response.json()
+  //         this.props.feedCounter()
+  //         alert(`post edited SUCCESFULLY`)
+  //         if (this.state.post !== null) {
+  //           this.fetchPostImage(data._id)
+  //         }
+
+  //         this.props.onHide()
+  //       } else {
+  //         const error = await response.json()
+  //         console.log(error)
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
   render() {
     return (
       <Modal show={this.props.show} onHide={() => this.props.onHide()}>
@@ -123,7 +134,7 @@ class ModalEditPost extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Col xs={12}>
-            <Form onSubmit={this.editFetch}>
+            <Form onSubmit={this.edit}>
               <Form.Group>
                 <Form.Control
                   as="textarea"

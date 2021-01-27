@@ -68,7 +68,7 @@ export default class ModalPost extends React.Component {
     const response = await addPost(this.state.POSTModel)
     if (response.data) {
       console.log("post submitted")
-      this.props.changeCounter()
+      //   this.props.feedCounter()
       this.setState({
         POSTModel: { text: "" },
       })

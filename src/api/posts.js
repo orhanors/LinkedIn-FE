@@ -22,7 +22,6 @@ export const addPost = async (data, callback) => {
     )
 
     if (!response.errors) {
-      //   return response.data
       return response.data
     } else {
       console.log(response.data)
@@ -39,11 +38,30 @@ export const fetchPosts = async () => {
   try {
     const response = await axios.get(`${REACT_APP_BE_URL}/posts`)
     if (response.data) {
-      console.log(response)
-      console.log(response.data)
       return response.data
     } else {
       console.log("posts not found", response.data)
     }
   } catch (error) {}
+}
+
+export const editPost = async (post, id) => {
+  try {
+    const modifiedPost = { ...post, user: userId, username: username }
+    console.log("modifiedPost", modifiedPost)
+    console.log("id", id)
+
+    let response = await axios.put(
+      `${REACT_APP_BE_URL}/posts/${id}`,
+      modifiedPost,
+      config
+    )
+    if (!response.errors) {
+      return response.data
+    } else {
+      console.log(response.data)
+    }
+  } catch (error) {
+    console.log("error editing the post", error.response.data)
+  }
 }
