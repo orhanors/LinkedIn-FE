@@ -26,7 +26,8 @@ import "./styles.scss";
 import { Link, withRouter } from "react-router-dom";
 import "./search.scss";
 import { isAuthenticated, logout } from "../../helpers/auth";
-
+import { getLocalStorage } from "../../helpers/localStorage";
+import { getCurrentUser, getAllUsers } from "../../api/profile";
 class NavBar extends React.Component {
 	state = { myProfile: {}, users: [], rawUsers: [], searchText: "" };
 
@@ -36,59 +37,27 @@ class NavBar extends React.Component {
 		});
 	};
 
-	fetchusers = async () => {
-		this.setState({ loading: true });
-
-		const url = "https://striveschool-api.herokuapp.com/api/profile";
-
-		try {
-			let response = await fetch(url, {
-				headers: {
-					Authorization: process.env.REACT_APP_TOKEN,
-				},
-			});
-
-			let users = await response.json();
-			console.log("navusers", users);
-
-			if (response.ok) {
-				this.setState({ rawUsers: users, loading: false });
-			} else {
-				this.setState({ loading: false });
-				<Alert variant='danger'>Something went wrong</Alert>;
-			}
-		} catch (error) {
-			console.log(error);
+	getUsers = async () => {
+		const response = await getAllUsers();
+		if (response.data) {
+			this.setState({ rawUsers: response.data, loading: false });
+		} else {
+			this.setState({ loading: false });
 		}
 	};
-	fetchProfile = async () => {
-		this.setState({ loading: true });
-
-		const url = "https://striveschool-api.herokuapp.com/api/profile/me";
-
-		try {
-			let response = await fetch(url, {
-				headers: {
-					Authorization: process.env.REACT_APP_TOKEN,
-				},
-			});
-
-			let myProfile = await response.json();
-			console.log("navProfile", myProfile);
-
-			if (response.ok) {
-				this.setState({ myProfile, loading: false });
-			} else {
-				this.setState({ loading: false });
-				<Alert variant='danger'>Something went wrong</Alert>;
-			}
-		} catch (error) {
-			console.log(error);
+	getUserProfile = async () => {
+		const currentUserId = getLocalStorage("user")._id;
+		const response = await getCurrentUser(currentUserId);
+		if (response.data) {
+			this.setState({ myProfile: response.data, loading: false });
+		} else {
+			this.setState({ loading: false });
 		}
 	};
+
 	componentDidMount = () => {
-		this.fetchProfile();
-		this.fetchusers();
+		this.getUserProfile();
+		this.getUsers();
 	};
 	CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 		<p>

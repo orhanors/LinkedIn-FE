@@ -11,6 +11,7 @@ import Interests from "../../components/Interests";
 import ModalExperience from "../../components/ModalExperience";
 import Sidebar from "../../components/Sidebar";
 import { getCurrentUser } from "../../api/profile";
+import { getLocalStorage } from "../../helpers/localStorage";
 
 class Profile extends React.Component {
 	state = {
@@ -26,8 +27,13 @@ class Profile extends React.Component {
 	};
 
 	getUser = async () => {
+		const endpoint =
+			this.props.match.params.id === "me"
+				? `${getLocalStorage("user")?._id}`
+				: `${this.props.match.params.id}`;
+
 		this.setState({ loading: true });
-		const response = await getCurrentUser();
+		const response = await getCurrentUser(endpoint);
 		if (!response.errors) {
 			this.setState({
 				myProfile: response.data,
