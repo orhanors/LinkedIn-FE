@@ -1,0 +1,45 @@
+import axios from "axios"
+import { getLocalStorage } from "../helpers/localStorage"
+
+const { REACT_APP_BE_URL } = process.env
+const userId = getLocalStorage("user")._id
+const username = getLocalStorage("user").username
+
+const config = {
+  headers: {
+    "Content-type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+}
+
+export const postComment = async (data, callback) => {
+  const newPost = { ...data, user: userId, username: username }
+  try {
+    const response = await axios.post(
+      `${REACT_APP_BE_URL}/posts`,
+      newPost,
+      config
+    )
+
+    if (!response.errors) {
+      //   return response.data
+      callback(response)
+    } else {
+      console.log(response.data)
+      //   return response.data
+    }
+  } catch (error) {
+    console.log("Error in posting comment", error)
+    console.log("error response data", error.response.data)
+    // return error.response.data
+  }
+}
+
+export const fetchComments = async (callback) => {
+  try {
+    const comments = await axios.get(`${REACT_APP_BE_URL}/posts`)
+    if (comments) {
+      callback(comments)
+    }
+  } catch (error) {}
+}
