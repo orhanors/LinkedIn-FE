@@ -63,57 +63,62 @@ export default class ModalPost extends React.Component {
     }
   }
 
-  handleComment = (e) => {
+  handleComment = async (e) => {
     e.preventDefault()
-    addPost(this.state.POSTModel, (response) => {
-      if (response) {
-        this.handleClose()
-        console.log("post submitted")
-      } else {
-        console.log("something wrong with posting comment")
-      }
-    })
+    const response = await addPost(this.state.POSTModel)
+    if (response.data) {
+      console.log("post submitted")
+      this.props.changeCounter()
+      this.setState({
+        POSTModel: { text: "" },
+      })
+      //   this.fetchPostImage(data._id)
+      this.handleClose()
+    } else {
+      console.log("something wrong with posting comment")
+    }
   }
 
-  // submitPost = async (e) => {
-  // 	e.preventDefault();
-  // 	try {
-  // 		let response = await fetch(
-  // 			`https://striveschool-api.herokuapp.com/api/posts/`,
-  // 			{
-  // 				method: "POST",
-  // 				body: JSON.stringify(this.state.POSTModel),
-  // 				headers: {
-  // 					"Content-Type": "application/json",
-  // 					Authorization: process.env.REACT_APP_TOKEN,
-  // 				},
-  // 			}
-  // 		);
-  // 		if (response.ok) {
-  // 			const data = await response.json();
+  //   submitPost = async (e) => {
+  //     e.preventDefault()
+  //     try {
+  //       let response = await fetch(
+  //         `https://striveschool-api.herokuapp.com/api/posts/`,
+  //         {
+  //           method: "POST",
+  //           body: JSON.stringify(this.state.POSTModel),
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: process.env.REACT_APP_TOKEN,
+  //           },
+  //         }
+  //       )
+  //       if (response.ok) {
+  //         const data = await response.json()
 
-  // 			this.props.feedCounter();
-  // 			this.setState({
-  // 				POSTModel: { text: "" },
-  // 			});
-  // 			this.fetchPostImage(data._id);
+  //         this.props.feedCounter()
+  //         this.setState({
+  //           POSTModel: { text: "" },
+  //         })
+  //         this.fetchPostImage(data._id)
 
-  // 			this.handleClose();
-  // 		} else {
-  // 			console.log(this.state.POSTModel.text);
-  // 			let error = await response.json();
-  // 			this.setState({
-  // 				errMessage: error.message,
-  // 			});
-  // 			console.log(error);
-  // 		}
-  // 	} catch (e) {
-  // 		console.log(e);
-  // 		this.setState({
-  // 			errMessage: e.message,
-  // 		});
-  // 	}
-  // };
+  //         this.handleClose()
+  //       } else {
+  //         console.log(this.state.POSTModel.text)
+  //         let error = await response.json()
+  //         this.setState({
+  //           errMessage: error.message,
+  //         })
+  //         console.log(error)
+  //       }
+  //     } catch (e) {
+  //       console.log(e)
+  //       this.setState({
+  //         errMessage: e.message,
+  //       })
+  //     }
+  //   }
+
   render() {
     return (
       <>

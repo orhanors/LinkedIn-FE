@@ -23,7 +23,7 @@ export const addPost = async (data, callback) => {
 
     if (!response.errors) {
       //   return response.data
-      callback(response)
+      return response.data
     } else {
       console.log(response.data)
       //   return response.data
@@ -31,14 +31,16 @@ export const addPost = async (data, callback) => {
   } catch (error) {
     console.log("Error in adding posting", error)
     console.log("error response data", error.response.data)
-    // return error.response.data
+    return error.response.data
   }
 }
 
 export const fetchPosts = async () => {
   try {
-    const response = await axios.get(`${REACT_APP_BE_URL}/posts`, config)
-    if (response) {
+    const response = await axios.get(`${REACT_APP_BE_URL}/posts`)
+    if (response.data) {
+      console.log(response)
+      console.log(response.data)
       return response.data
     } else {
       console.log("posts not found", response.data)

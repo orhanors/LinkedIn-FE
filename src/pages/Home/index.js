@@ -23,13 +23,7 @@ export default class Home extends Component {
               <Card className="cardPost w-100">
                 <Card.Body className="w-100">
                   <Button className="startpostbtn ">
-                    <ModalPost
-                      feedCounter={() =>
-                        this.setState({
-                          feedCounter: this.state.feedCounter + 1,
-                        })
-                      }
-                    />
+                    <ModalPost feedCounter={this.state.feedCounter} />
                   </Button>
                 </Card.Body>
                 <Row
