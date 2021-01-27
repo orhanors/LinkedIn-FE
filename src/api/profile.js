@@ -2,7 +2,7 @@ import axios from "axios";
 import { getLocalStorage } from "../helpers/localStorage";
 
 const { REACT_APP_BE_URL } = process.env;
-const currentUserId = getLocalStorage("user")?._id;
+
 const config = {
 	headers: {
 		"Content-type": "application/json",
@@ -21,9 +21,10 @@ export const getAllUsers = async () => {
 	}
 };
 export const getCurrentUser = async () => {
+	const userId = getLocalStorage("user")?._id;
 	try {
 		const response = await axios.get(
-			`${REACT_APP_BE_URL}/profile/${currentUserId}`
+			`${REACT_APP_BE_URL}/profile/${userId}`
 		);
 		console.log("Current user: ", response.data);
 		return response.data;
@@ -34,6 +35,7 @@ export const getCurrentUser = async () => {
 };
 
 export const editCurrentUser = async (data) => {
+	const currentUserId = getLocalStorage("user")?._id;
 	try {
 		const response = await axios.put(
 			`${REACT_APP_BE_URL}/profile/${currentUserId}`,
@@ -48,6 +50,7 @@ export const editCurrentUser = async (data) => {
 };
 
 export const addProfileImage = async (data) => {
+	const currentUserId = getLocalStorage("user")?._id;
 	try {
 		const response = await axios.post(
 			`${REACT_APP_BE_URL}/profile/${currentUserId}/picture`,
