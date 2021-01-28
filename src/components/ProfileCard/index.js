@@ -15,7 +15,7 @@ class ProfileCard extends React.Component {
 						className='ProfileCardImg'
 					/>
 
-					{Object.values(this.props.meProfile).length !== 0 && (
+					{Object.values(this.props?.meProfile).length !== 0 && (
 						<>
 							<Row className='d-flex justify-content-center'>
 								<img

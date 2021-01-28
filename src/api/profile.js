@@ -21,7 +21,6 @@ export const getAllUsers = async () => {
 	}
 };
 export const getCurrentUser = async (endpoint) => {
-	const userId = getLocalStorage("user")?._id;
 	try {
 		const response = await axios.get(
 			`${REACT_APP_BE_URL}/profile/${endpoint}`
