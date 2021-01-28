@@ -8,6 +8,7 @@ const config = {
 		"Access-Control-Allow-Origin": "*",
 	},
 };
+
 const userId = getLocalStorage("user")?._id;
 export const postExperience = async (data) => {
 	try {
