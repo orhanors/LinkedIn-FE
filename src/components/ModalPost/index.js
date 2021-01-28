@@ -77,7 +77,6 @@ export default class ModalPost extends React.Component {
       this.setState({
         POSTModel: { text: "" },
       })
-      //   this.fetchPostImage(data._id)
 
       if (this.state.post) {
         await postImage(this.state.post, response.data._id)
@@ -91,46 +90,6 @@ export default class ModalPost extends React.Component {
       console.log("something wrong with posting comment")
     }
   }
-
-  //   submitPost = async (e) => {
-  //     e.preventDefault()
-  //     try {
-  //       let response = await fetch(
-  //         `https://striveschool-api.herokuapp.com/api/posts/`,
-  //         {
-  //           method: "POST",
-  //           body: JSON.stringify(this.state.POSTModel),
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: process.env.REACT_APP_TOKEN,
-  //           },
-  //         }
-  //       )
-  //       if (response.ok) {
-  //         const data = await response.json()
-
-  //         this.props.feedCounter()
-  //         this.setState({
-  //           POSTModel: { text: "" },
-  //         })
-  //         this.fetchPostImage(data._id)
-
-  //         this.handleClose()
-  //       } else {
-  //         console.log(this.state.POSTModel.text)
-  //         let error = await response.json()
-  //         this.setState({
-  //           errMessage: error.message,
-  //         })
-  //         console.log(error)
-  //       }
-  //     } catch (e) {
-  //       console.log(e)
-  //       this.setState({
-  //         errMessage: e.message,
-  //       })
-  //     }
-  //   }
 
   render() {
     return (
