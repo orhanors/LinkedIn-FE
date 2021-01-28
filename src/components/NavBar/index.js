@@ -10,6 +10,7 @@ import {
 	Alert,
 	Dropdown,
 	Row,
+	Badge,
 } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -28,10 +29,17 @@ import "./search.scss";
 import { isAuthenticated, logout } from "../../helpers/auth";
 import { getLocalStorage } from "../../helpers/localStorage";
 import { getCurrentUser, getAllUsers } from "../../api/profile";
-import AddFriendRequestList from "../AddFriendRequestList/";
+import AddFriendList from "../AddFriendList";
 
 class NavBar extends React.Component {
-	state = { myProfile: {}, users: [], rawUsers: [], searchText: "" };
+	state = {
+		myProfile: {},
+		users: [],
+		rawUsers: [],
+		searchText: "",
+		showFriendList: false,
+		changeCounter: 0,
+	};
 
 	handleLogout = () => {
 		logout(() => {
@@ -56,7 +64,11 @@ class NavBar extends React.Component {
 			this.setState({ loading: false });
 		}
 	};
-
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.changeCounter !== this.state.changeCounter) {
+			this.getUserProfile();
+		}
+	}
 	componentDidMount = () => {
 		this.getUserProfile();
 		this.getUsers();
@@ -79,7 +91,13 @@ class NavBar extends React.Component {
 	showAuthNavBar = () => {
 		return (
 			<div>
-				<AddFriendRequestList
+				<AddFriendList
+					updateNavBar={() =>
+						this.setState({
+							changeCounter: this.state.changeCounter + 1,
+						})
+					}
+					showFriendList={this.state.showFriendList}
 					currentUserProfile={this.state.myProfile}
 				/>
 				<Navbar
@@ -179,15 +197,37 @@ class NavBar extends React.Component {
 
 							<Nav className='ml-auto'>
 								<Link to='/'>
-									<div className='nav-link'>
+									<div className='nav-link mt-2'>
 										<HomeIcon />
 										<p>Home</p>
 									</div>
 								</Link>
 								<Nav.Link href='#' className='nav-link'>
-									<PeopleAltIcon />
-
-									<p>My Network</p>
+									<div
+										onClick={() =>
+											this.setState({
+												showFriendList: !this.state
+													.showFriendList,
+											})
+										}>
+										<PeopleAltIcon />
+										{this.state?.myProfile?.friendRequests
+											?.length > 0 && (
+											<div className='notification-badge-container'>
+												{" "}
+												<Badge
+													className='notification-badge'
+													variant='danger'>
+													{
+														this.state.myProfile
+															.friendRequests
+															.length
+													}
+												</Badge>
+											</div>
+										)}
+										<p>My Network</p>
+									</div>
 								</Nav.Link>
 								<Nav.Link href='#' className='nav-link'>
 									<WorkIcon />

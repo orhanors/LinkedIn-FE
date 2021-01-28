@@ -102,7 +102,14 @@ class BoxInfo extends React.Component {
 								<li
 									className='mx-4 text-primary'
 									style={{ fontWeight: "bold" }}>
-									72 connections
+									{this.props.myProfile.friends.length > 0
+										? `${
+												this.props.myProfile.friends
+													.length +
+												" " +
+												"connections"
+										  }`
+										: "No connections"}
 								</li>
 								<li
 									className='mx-3 text-primary'

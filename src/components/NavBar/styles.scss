@@ -104,3 +104,15 @@
 	padding: 8px 12px 0px;
 	color: black;
 }
+
+.notification-badge-container {
+	position: relative;
+}
+
+.notification-badge {
+	position: absolute;
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 50%;
+	top: -2.3rem;
+}

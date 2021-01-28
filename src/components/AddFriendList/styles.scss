@@ -1,0 +1,38 @@
+.addFriendList-container {
+	position: relative;
+	z-index: 100;
+	width: 30vw;
+	margin-left: 45%;
+
+	.addFriendList {
+		position: absolute;
+		top: 4rem;
+		left: 10;
+		right: 0;
+		left: 0;
+
+		.accept {
+			background-color: #0a66c2;
+			color: white;
+			border: none;
+			padding-left: 8px;
+			padding-right: 8px;
+			padding-top: 6px;
+			padding-bottom: 6px;
+			border-radius: 15px;
+			font-weight: bold;
+		}
+
+		.deny {
+			background-color: #919191;
+			color: white;
+			border: none;
+			padding-left: 8px;
+			padding-right: 8px;
+			padding-top: 6px;
+			padding-bottom: 6px;
+			border-radius: 15px;
+			font-weight: bold;
+		}
+	}
+}
