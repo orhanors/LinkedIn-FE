@@ -94,25 +94,14 @@ class NavBar extends React.Component {
 		}
 	};
 /* 
-  	searchStringHandler = (e) => {
-    	if (e.keyCode === 13 || e.key === "Enter") {
-      		this.props.showSearchResult(this.state.searchString);
-    	} else {
-      		this.setState({ searchString: e.currentTarget.value });
-    	}
+	searchStringHandler = (e) => {
+		if (e.keyCode === 13 || e.key === "Enter") {
+			this.props.showSearchResult(this.state.searchString);
+		} else {
+			this.setState({ searchString: e.currentTarget.value });
+		}
 	}; 
-	  
-	 _______________
-	 
-	 <FormControl
-                className="mr-3"
-                placeholder="Search and press enter"
-                aria-label="search"
-                aria-describedby="basic-addon1"
-                onKeyDown={this.searchStringHandler}
-                onChange={this.searchStringHandler}
-                value={this.state.searchString}
-              />*/
+*/
 
 	componentDidMount = () => {
 		this.fetchProfile();
@@ -162,8 +151,24 @@ class NavBar extends React.Component {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 
+						
+
+						
 						{/* new searchbar */}
 
+						<InputGroup className="icons">
+							<FormControl
+								placeholder="Search and press enter"
+								aria-label="search"
+								aria-describedby="basic-addon1"
+								onKeyDown={this.searchStringHandler}
+								onChange={this.searchStringHandler}
+								value={this.state.searchString}
+							/>
+							<InputGroup.Append>
+								<Button onClick={this.handleEnterKey}>Search</Button>
+							</InputGroup.Append>
+						</InputGroup>
 						
 
 
@@ -173,7 +178,7 @@ class NavBar extends React.Component {
 
 
 
-						<Form inline>
+						{/* <Form inline>
 							<InputGroup style={{ width: "240px" }}>
 								<Typeahead
 									labelKey={(option) => `${option.username}`}
@@ -237,7 +242,7 @@ class NavBar extends React.Component {
 									options={this.state.users}
 								/>
 							</InputGroup>
-						</Form>
+						</Form> */}
 					
 
 
