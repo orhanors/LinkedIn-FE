@@ -46,7 +46,7 @@ class NavBar extends React.Component {
 		}
 	};
 	getUserProfile = async () => {
-		const currentUserId = getLocalStorage("user")._id;
+		const currentUserId = getLocalStorage("user")?._id;
 		const response = await getCurrentUser(currentUserId);
 		if (response.data) {
 			this.setState({ myProfile: response.data, loading: false });
