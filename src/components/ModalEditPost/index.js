@@ -26,25 +26,26 @@ class ModalEditPost extends React.Component {
     })
   }
 
-  componentDidUpdate = (previousProps) => {
-    if (previousProps.post.text !== this.props.post.text) {
-      this.setState({
-        postEdit: { text: this.props.post.text },
-      })
-    }
-  }
-
-  //   componentDidUpdate = (previousProps, previousState) => {
-  //     if (
-  //       previousProps.post.text !== this.props.post.text ||
-  //       previousState.post != this.state.post
-  //     ) {
-  //       console.log(previousState.post, this.state.post)
+  //   componentDidUpdate = (previousProps) => {
+  //     if (previousProps.post.text !== this.props.post.text) {
   //       this.setState({
   //         postEdit: { text: this.props.post.text },
   //       })
   //     }
   //   }
+
+  componentDidUpdate = (previousProps, previousState) => {
+    if (
+      previousProps.post.text !== this.props.post.text ||
+      previousState.post != this.state.post
+    ) {
+      console.log(previousState.post, this.state.post)
+      this.setState({
+        postEdit: { text: this.props.post.text },
+        post: this.state.post,
+      })
+    }
+  }
 
   delete = async () => {
     const response = await deletePost(this.props.post._id)
