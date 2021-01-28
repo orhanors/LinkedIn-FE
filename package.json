@@ -1,55 +1,55 @@
 {
-  "name": "linkedin-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.2",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
-    "clsx": "^1.1.1",
-    "js-cookie": "^2.2.1",
-    "lodash": "^4.17.20",
-    "moment": "^2.29.1",
-    "node-sass": "^4.14.1",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.3",
-    "react-bootstrap-typeahead": "^5.1.4",
-    "react-chat-popup": "^1.1.2",
-    "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0",
-    "react-moment": "^1.1.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "serve": "^11.3.2",
-    "validator": "^13.5.2",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "linkedin-frontend",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@material-ui/core": "^4.11.3",
+		"@material-ui/icons": "^4.11.2",
+		"@testing-library/jest-dom": "^5.11.9",
+		"@testing-library/react": "^11.2.3",
+		"@testing-library/user-event": "^12.6.2",
+		"axios": "^0.21.1",
+		"bootstrap": "^4.6.0",
+		"clsx": "^1.1.1",
+		"js-cookie": "^2.2.1",
+		"lodash": "^4.17.20",
+		"moment": "^2.29.1",
+		"node-sass": "^4.14.1",
+		"react": "^17.0.1",
+		"react-bootstrap": "^1.4.3",
+		"react-bootstrap-typeahead": "^5.1.4",
+		"react-chat-popup": "^1.1.2",
+		"react-dom": "^17.0.1",
+		"react-icons": "^4.1.0",
+		"react-moment": "^1.1.1",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "4.0.1",
+		"serve": "^11.3.2",
+		"validator": "^13.5.2",
+		"web-vitals": "^0.2.4"
+	},
+	"scripts": {
+		"start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
+		"build": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
