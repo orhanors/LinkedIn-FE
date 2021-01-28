@@ -11,16 +11,17 @@ class CommentList extends React.Component {
     this.setState({ loading: true })
     try {
       let response = await fetch(
-        `${process.env.REACT_APP_BE_URL}/posts/${this.props.id}/comment`
+        `${process.env.REACT_APP_BE_URL}/posts/${this.props.id}/comments`
       )
       let comments = await response.json()
-      console.log("comments", comments)
-      if (comments.length > 0) {
-        comments = comments.reverse()
+      console.log("comments", comments.data.comments)
+      let commentsArray = comments.data.comments
+      if (commentsArray.length > 0) {
+        commentsArray = commentsArray.reverse()
 
         setTimeout(() => {
-          this.setState({ comments: comments, loading: false })
-        }, 2000)
+          this.setState({ comments: commentsArray, loading: false })
+        }, 5000)
       }
     } catch (error) {
       console.log(error)
