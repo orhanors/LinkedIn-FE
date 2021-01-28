@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Alert, Spinner } from "react-bootstrap";
+import { Col, Spinner } from "react-bootstrap";
 import BoxInfo from "../../components/BoxInfo";
 import ProfileStrength from "../../components/ProfileStrength";
 import Dashboard from "../../components/Dashboard";

@@ -52,7 +52,7 @@ class Feed extends React.Component {
 
 	populateFeed = async () => {
 		const posts = await fetchPosts();
-		console.log(posts.data);
+		console.log("posts data", posts.data);
 		if (posts.data.length > 0) {
 			// let meProfile = posts.data.filter(
 			// 	// (post) => post.username === process.env.REACT_APP_USER
@@ -125,7 +125,7 @@ class Feed extends React.Component {
 													width={64}
 													height={64}
 													className='mr-3'
-													src={post.user.image}
+													src={post?.user?.image}
 													alt='user'
 													style={{
 														borderRadius: "50%",
@@ -134,7 +134,7 @@ class Feed extends React.Component {
 													onClick={() =>
 														this.props.history.push(
 															"/profile/" +
-																post.user
+																post?.user?._id
 														)
 													}
 												/>
@@ -143,19 +143,20 @@ class Feed extends React.Component {
 														onClick={() =>
 															this.props.history.push(
 																"/profile/" +
-																	post.user
+																	post?.user
+																		?._id
 															)
 														}>
-														{post.username}
+														{post?.username}
 													</h5>
 													<h6
 														style={{
 															color: "#b0b0b0",
 															fontSize: "15px",
 														}}>
-														{post.user.name +
+														{post?.user?.name +
 															" " +
-															post.user.surname}
+															post?.user?.surname}
 													</h6>
 													<h6
 														style={{

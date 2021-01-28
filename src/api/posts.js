@@ -12,7 +12,7 @@ const config = {
 	},
 };
 
-export const addPost = async (data, callback) => {
+export const addPost = async (data) => {
 	const newPost = { ...data, user: userId, username: username };
 	try {
 		const response = await axios.post(
