@@ -18,6 +18,7 @@ class Feed extends React.Component {
     comments: [],
     loading: true,
     userName: getLocalStorage("user").username,
+    userId: getLocalStorage("user")._id,
     show: false,
     post: {},
     submitCounter: 0,
@@ -220,6 +221,8 @@ class Feed extends React.Component {
                       id={post._id}
                       editedCm={this.state.editComment}
                       meProfile={this.props.meProfile}
+                      userId={this.state.userId}
+                      userName={this.state.userName}
                       clearEditCommentState={() =>
                         this.setState({
                           editComment: {
