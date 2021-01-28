@@ -4,12 +4,25 @@ import BoxInfoButton from "../BoxInfoButton";
 import OpenToWork from "../OpenToWork";
 import PencilEdit from "../PencilEdit";
 import ModalProfilePicture from "../ModalProfilePicture";
-
+import AddFriendButton from "../AddFriendButton/index";
+import { getCurrentUser } from "../../api/profile";
+import { getLocalStorage } from "../../helpers/localStorage";
 class BoxInfo extends React.Component {
 	state = {
 		showPictureModal: false,
+		currentUserFriendList: [],
 	};
 
+	componentDidMount() {
+		this.getUser();
+	}
+	getUser = async () => {
+		const id = getLocalStorage("user")._id;
+		const response = await getCurrentUser(id);
+		if (response.data) {
+			this.setState({ currentUserFriendList: response.data.friends });
+		}
+	};
 	render() {
 		return (
 			<Card>
@@ -52,6 +65,10 @@ class BoxInfo extends React.Component {
 							)}
 						</div>
 						<div>
+							<AddFriendButton
+								myProfile={this.props.myProfile}
+								me={this.props.me}
+							/>
 							<BoxInfoButton me={this.props.me} />
 							<Button
 								variant='outline-secondary'
