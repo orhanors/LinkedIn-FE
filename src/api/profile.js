@@ -25,7 +25,7 @@ export const getCurrentUser = async (endpoint) => {
 		const response = await axios.get(
 			`${REACT_APP_BE_URL}/profile/${endpoint}`
 		);
-		console.log("Current user: ", response.data);
+
 		return response.data;
 	} catch (error) {
 		console.log("Get current user error: ", error);

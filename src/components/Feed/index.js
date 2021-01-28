@@ -54,11 +54,11 @@ class Feed extends React.Component {
 		const posts = await fetchPosts();
 		console.log(posts.data);
 		if (posts.data.length > 0) {
-			let meProfile = posts.data.filter(
-				// (post) => post.username === process.env.REACT_APP_USER
-				(post) => post.username === this.state.userName
-			);
-			meProfile.length > 0 && this.props.fillMeProflie(meProfile[0]);
+			// let meProfile = posts.data.filter(
+			// 	// (post) => post.username === process.env.REACT_APP_USER
+			// 	(post) => post.username === this.state.userName
+			// );
+			// meProfile.length > 0 && this.props.fillMeProflie(meProfile[0]);
 			this.setState({ posts: posts.data.reverse(), loading: false });
 			// this.props.changeCounter()
 		}
@@ -93,12 +93,12 @@ class Feed extends React.Component {
 	//   }
 	// }
 
-	// componentDidUpdate = (previousProps) => {
-	//   if (previousProps.feedCounter !== this.props.feedCounter) {
-	//     this.populateFeed()
-	//     console.log("Chaned")
-	//   }
-	// }
+	componentDidUpdate = (previousProps) => {
+		if (previousProps.feedCounter !== this.props.feedCounter) {
+			this.populateFeed();
+			console.log("Chaned");
+		}
+	};
 
 	componentDidMount = () => {
 		this.populateFeed();

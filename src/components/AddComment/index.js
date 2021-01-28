@@ -119,7 +119,7 @@ class AddComment extends React.Component {
 										objectFit: "cover",
 										borderRadius: "50%",
 									}}
-									src={this.props.meProfile.user.image}
+									src={this.props.meProfile.image}
 								/>
 							</Col>
 						)}

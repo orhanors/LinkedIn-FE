@@ -82,10 +82,11 @@ export const deletePost = async (id) => {
 	}
 };
 
-export const postImage = async (id) => {
+export const postImage = async (data, postId) => {
 	try {
 		const response = await axios.post(
-			`${REACT_APP_BE_URL}/posts/${id}`,
+			`${REACT_APP_BE_URL}/posts/${postId}/picture`,
+			data,
 			config
 		);
 		if (!response.errors) {

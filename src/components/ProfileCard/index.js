@@ -5,7 +5,18 @@ import StopIcon from "@material-ui/icons/Stop";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 
 class ProfileCard extends React.Component {
-	render() {
+	// componentDidUpdate(prevProps) {
+	// 	// JSON.stringify(obj1) === JSON.stringify(obj2)
+	// 	if (
+	// 		JSON.stringify(prevProps.meProfile) !==
+	// 		JSON.stringify(this.props.meProfile)
+	// 	) {
+	// 		console.log("RERENDERED PROFILE CARD");
+	// 		this.showProfileCard();
+	// 	}
+	// }
+
+	showProfileCard = () => {
 		return (
 			<div>
 				<Card className='ProfileCard mb-3'>
@@ -15,23 +26,27 @@ class ProfileCard extends React.Component {
 						className='ProfileCardImg'
 					/>
 
-					{Object.values(this.props?.meProfile).length !== 0 && (
+					{this.props?.meProfile && (
 						<>
+							{console.log(
+								"test the test: ",
+								this.props.meProfile
+							)}
 							<Row className='d-flex justify-content-center'>
 								<img
 									className='avatarProfile'
-									src={this.props.meProfile.user.image}
+									src={this.props.meProfile.image}
 									roundedCircle
 								/>
 							</Row>
 
 							<Card.Body>
 								<Card.Title className='text-center'>
-									{this.props.meProfile.user.name}{" "}
-									{this.props.meProfile.user.surname}{" "}
+									{this.props.meProfile.name}{" "}
+									{this.props.meProfile.surname}{" "}
 								</Card.Title>
 								<Card.Text className='text-center'>
-									{this.props.meProfile.user.title}
+									{this.props.meProfile.title}
 								</Card.Text>
 
 								<Row className='BorderCardProfile mt-3 pt-3'>
@@ -77,6 +92,10 @@ class ProfileCard extends React.Component {
 				</Card>
 			</div>
 		);
+	};
+
+	render() {
+		return <div>{this.showProfileCard()}</div>;
 	}
 }
 export default ProfileCard;

@@ -78,8 +78,10 @@ export default class ModalPost extends React.Component {
 				POSTModel: { text: "" },
 			});
 			//   this.fetchPostImage(data._id)
+
 			await postImage(this.state.post, response.data._id);
 			this.handleClose();
+			this.props.feedCounter();
 		} else {
 			console.log("something wrong with posting comment");
 		}
