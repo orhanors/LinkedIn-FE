@@ -1,0 +1,55 @@
+.ProfileCardImg {
+	height: 20%;
+	background-color: transparent !important;
+}
+.ProfileCard {
+	width: 15vw;
+	border-radius: 20px;
+}
+.ProfileCardImg {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.avatarProfile {
+	background-color: white;
+	padding: 2px;
+	width: 10rem;
+	height: auto;
+	margin-top: -14%;
+	width: 68px;
+	height: 68px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+.left-side-hover-items:hover {
+	background-color: rgb(146, 145, 145);
+}
+.left-side-title {
+	font-weight: 500;
+	font-size: 16px;
+	color: black;
+}
+.left-side-info {
+	color: gray;
+	margin-left: 1rem;
+	font-family: Helvetica, sans-serif;
+}
+
+.left-side-views {
+	color: gray;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 500;
+}
+.numeric-info {
+	color: #0a66c2;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 700;
+}
+
+.left-side-bottom {
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 700;
+}
