@@ -15,7 +15,7 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 
 import HomeIcon from "@material-ui/icons/Home";
-//import { HiSearch } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
 import WorkIcon from "@material-ui/icons/Work";
 import SmsIcon from "@material-ui/icons/Sms";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -24,8 +24,9 @@ import { CgMenuGridR } from "react-icons/cg";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import "./styles.scss";
 import { Link, withRouter } from "react-router-dom";
-//import "./search.scss";
+import "./search.scss";
 import { isAuthenticated, logout } from "../../helpers/auth";
+import {getAllUsers, getCurrentUser} from "../../api/profile"
 
 class NavBar extends React.Component {
 	state = { myProfile: {}, users: [], rawUsers: [], searchText: "" };
@@ -39,14 +40,17 @@ class NavBar extends React.Component {
 	fetchusers = async () => {
 		this.setState({ loading: true });
 
-		const url = "https://striveschool-api.herokuapp.com/api/profile";
+		//const url = "https://striveschool-api.herokuapp.com/api/profile";
 
 		try {
-			let response = await fetch(url, {
+			/*let response = await fetch(url, {
 				headers: {
 					Authorization: process.env.REACT_APP_TOKEN,
 				},
-			});
+			}); */
+
+			let response = getAllUsers()
+			console.log(response)
 
 			let users = await response.json();
 			console.log("navusers", users);
@@ -64,14 +68,17 @@ class NavBar extends React.Component {
 	fetchProfile = async () => {
 		this.setState({ loading: true });
 
-		const url = "https://striveschool-api.herokuapp.com/api/profile/me";
+		//const url = "https://striveschool-api.herokuapp.com/api/profile/me";
 
 		try {
-			let response = await fetch(url, {
+			/* let response = await fetch(url, {
 				headers: {
 					Authorization: process.env.REACT_APP_TOKEN,
 				},
-			});
+			}); */
+
+			let response = getCurrentUser()
+			console.log(response)
 
 			let myProfile = await response.json();
 			console.log("navProfile", myProfile);
@@ -155,6 +162,9 @@ class NavBar extends React.Component {
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 
+						{/* new searchbar */}
+
+						
 
 
 
@@ -162,7 +172,8 @@ class NavBar extends React.Component {
 
 
 
-						{/*   <Form inline>
+
+						<Form inline>
 							<InputGroup style={{ width: "240px" }}>
 								<Typeahead
 									labelKey={(option) => `${option.username}`}
@@ -181,7 +192,7 @@ class NavBar extends React.Component {
 												<div className='search-item d-flex align-items-center justify-content-start py-3 px-3 mb-2'>
 													<div></div>
 													<div className='ml-3'>
-														{/* <link to={`/profile/${option._id}`}> {" "}
+														<link to={`/profile/${option._id}`}> {" "}
 														<p
 															className='mb-0'
 															onClick={() =>
@@ -192,7 +203,7 @@ class NavBar extends React.Component {
 															}>
 															{option.name}
 														</p>{" "}
-														{/* </link> 
+														</link> 
 														<p className='mb-0'>
 															{" "}
 															{option.surname}
@@ -227,7 +238,7 @@ class NavBar extends React.Component {
 								/>
 							</InputGroup>
 						</Form>
-								*/}
+					
 
 
 
