@@ -45,7 +45,7 @@ class Profile extends React.Component {
 	};
 
 	componentDidMount = () => {
-		if (this.props.match.params.id == "me") {
+		if (this.props.match.params.id === "me") {
 			this.props.changeMe();
 		} else {
 			this.props.changeNotMe();

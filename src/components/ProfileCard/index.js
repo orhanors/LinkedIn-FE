@@ -25,8 +25,8 @@ class ProfileCard extends React.Component {
 							<Row className='d-flex justify-content-center'>
 								<img
 									className='avatarProfile'
+									alt='avatar-profile'
 									src={this.props.meProfile.image}
-									roundedCircle
 								/>
 							</Row>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Row, Button } from "react-bootstrap";
+import { Form, Row } from "react-bootstrap";
 const AddComment = (props) => {
 	return (
 		<Form className='add-comment-form  mb-3'>

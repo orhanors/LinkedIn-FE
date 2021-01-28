@@ -114,12 +114,9 @@ export default class ModalExperience extends Component {
 	deleteExperience = async () => {
 		try {
 			const response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/${this.props.id}/experiences/${this.props.editExp.experience._id}`,
+				`${process.env.REACT_APP_BE_URL}/profile/${this.props.id}/experiences/${this.props.editExp.experience._id}`,
 				{
 					method: "DELETE",
-					headers: {
-						Authorization: process.env.REACT_APP_TOKEN,
-					},
 				}
 			);
 			if (response.ok) {

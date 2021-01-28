@@ -112,7 +112,6 @@ class Feed extends React.Component {
 			);
 
 			if (response.ok) {
-				// alert("Comment saved!");
 				this.setState({
 					addComment: {
 						comment: "",
@@ -124,7 +123,6 @@ class Feed extends React.Component {
 				});
 			} else {
 				alert("something went wrong");
-				let error = await response.json();
 			}
 		} catch (e) {
 			alert("something went wrong");
@@ -228,7 +226,8 @@ class Feed extends React.Component {
 										{post.image && (
 											<img
 												src={post.image}
-												className='img-fluid '
+												className='img-fluid'
+												alt='post-img'
 												style={{
 													objectFit: "cover",
 													maxHeight: "300px",

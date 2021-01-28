@@ -1,7 +1,7 @@
 import React from "react";
-import { ListGroup, Badge, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { Spinner, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 class CommentList extends React.Component {
 	state = {
 		comments: [],
@@ -76,7 +76,7 @@ class CommentList extends React.Component {
 	}
 	render() {
 		let body;
-		let { user } = this.state;
+
 		if (!this.state.isLoading && this.state.comments.length !== 0) {
 			body = (
 				<div className='mb-5'>

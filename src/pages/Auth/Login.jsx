@@ -72,7 +72,7 @@ function Login() {
 
 	const showLoginForm = () => {
 		return (
-			<div class='d-flex flex-column'>
+			<div className='d-flex flex-column'>
 				<div className='login-input-wrap mb-4'>
 					<p className='login-label mb-0'>Email</p>
 					<input
