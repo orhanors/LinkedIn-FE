@@ -78,7 +78,7 @@ class NavBar extends React.Component {
 			{children}
 			<RiArrowDownSFill
 				className='m-0 p-0'
-				style={{ fontSize: "17px" }}
+				style={{ fontSize: "16px" }}
 				onClick={(e) => {
 					e.preventDefault();
 					onClick(e);
@@ -255,7 +255,9 @@ class NavBar extends React.Component {
 											id='dropdown-custom-components'></Dropdown.Toggle>
 										<Dropdown.Menu
 											id='meMenu'
-											style={{ minWidth: "300px" }}>
+											style={{
+												minWidth: "300px",
+											}}>
 											{this.state.myProfile ? (
 												<>
 													<Dropdown.Item
@@ -285,14 +287,14 @@ class NavBar extends React.Component {
 																			.myProfile
 																			.surname}
 																</h6>
-																<h6>
+																<p>
 																	{
 																		this
 																			.state
 																			.myProfile
 																			.title
 																	}
-																</h6>
+																</p>
 															</div>
 														</div>
 													</Dropdown.Item>
