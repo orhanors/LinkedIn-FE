@@ -1,7 +1,7 @@
 import React from "react"
 import { Modal, Form, Col, Button, Alert } from "react-bootstrap"
 
-import { editPost } from "../../api/posts"
+import { editPost, deletePost } from "../../api/posts"
 
 class ModalEditPost extends React.Component {
   state = {
@@ -31,29 +31,40 @@ class ModalEditPost extends React.Component {
     }
   }
 
-  deletePost = async () => {
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/${this.props.post._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: process.env.REACT_APP_TOKEN,
-          },
-        }
-      )
-      if (response.ok) {
-        alert("Post DELETED successfully")
-        this.props.feedCounter()
-        this.props.onHide()
-      } else {
-        const error = await response.json()
-        console.log(error)
-      }
-    } catch (error) {
+  delete = async () => {
+    const response = await deletePost(this.props.post._id)
+    if (response.data) {
+      alert("Post deleted successfully")
+      this.props.onHide()
+    } else {
+      const error = response.error
       console.log(error)
     }
   }
+
+  //   deletePost = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://striveschool-api.herokuapp.com/api/posts/${this.props.post._id}`,
+  //         {
+  //           method: "DELETE",
+  //           headers: {
+  //             Authorization: process.env.REACT_APP_TOKEN,
+  //           },
+  //         }
+  //       )
+  //       if (response.ok) {
+  //         alert("Post DELETED successfully")
+  //         this.props.feedCounter()
+  //         this.props.onHide()
+  //       } else {
+  //         const error = await response.json()
+  //         console.log(error)
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
   fetchPostImage = async (id) => {
     try {
       let response = await fetch(
@@ -164,7 +175,7 @@ class ModalEditPost extends React.Component {
               <div className="d-flex justify-content-around">
                 <Button
                   variant="outline-secondary"
-                  onClick={() => this.deletePost()}
+                  onClick={() => this.delete()}
                 >
                   Delete
                 </Button>

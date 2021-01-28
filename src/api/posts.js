@@ -65,3 +65,30 @@ export const editPost = async (post, id) => {
     console.log("error editing the post", error.response.data)
   }
 }
+
+export const deletePost = async (id) => {
+  try {
+    const response = await axios.delete(
+      `${REACT_APP_BE_URL}/posts/${id}`,
+      config
+    )
+    if (!response.errors) {
+      return response.data
+    } else {
+      console.log(response.data)
+    }
+  } catch (error) {
+    console.log("error editing the post", error.response.data)
+  }
+}
+
+export const postImage = async (id) => {
+  try {
+    const response = await axios.post(`${REACT_APP_BE_URL}/posts/${id}`, config)
+    if (!response.errors) {
+      return response.data
+    } else {
+      console.log(response.data)
+    }
+  } catch (error) {}
+}

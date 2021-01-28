@@ -9,7 +9,7 @@ import { CgMathPlus } from "react-icons/cg"
 import ImageIcon from "@material-ui/icons/Image"
 import YouTubeIcon from "@material-ui/icons/YouTube"
 import { GrNotes } from "react-icons/gr"
-import { addPost } from "../../api/posts"
+import { addPost, postImage } from "../../api/posts"
 
 export default class ModalPost extends React.Component {
   state = {
@@ -35,44 +35,50 @@ export default class ModalPost extends React.Component {
 
     this.setState({ post: formData })
   }
-  fetchPostImage = async (id) => {
-    if (this.state.post) {
-      try {
-        let response = await fetch(
-          `https://striveschool-api.herokuapp.com/api/posts/${id}`,
-          {
-            method: "POST",
-            body: this.state.post,
 
-            headers: {
-              Authorization: process.env.REACT_APP_TOKEN,
-            },
-          }
-        )
-        if (response.ok) {
-          console.log("OK")
-          this.props.feedCounter()
-        } else {
-          const error = await response.json()
-          console.log(error)
-          ;<Alert variant="danger">Something went wrong</Alert>
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
+  // handleImage = async () => {
+  // 	postImage(id)
+  // }
+
+  //   fetchPostImage = async (id) => {
+  //     if (this.state.post) {
+  //       try {
+  //         let response = await fetch(
+  //           `https://striveschool-api.herokuapp.com/api/posts/${id}`,
+  //           {
+  //             method: "POST",
+  //             body: this.state.post,
+
+  //             headers: {
+  //               Authorization: process.env.REACT_APP_TOKEN,
+  //             },
+  //           }
+  //         )
+  //         if (response.ok) {
+  //           console.log("OK")
+  //           this.props.feedCounter()
+  //         } else {
+  //           const error = await response.json()
+  //           console.log(error)
+  //           ;<Alert variant="danger">Something went wrong</Alert>
+  //         }
+  //       } catch (error) {
+  //         console.log(error)
+  //       }
+  //     }
+  //   }
 
   handleComment = async (e) => {
     e.preventDefault()
     const response = await addPost(this.state.POSTModel)
     if (response.data) {
-      console.log("post submitted")
+      console.log("post submitted", response.data)
       //   this.props.feedCounter()
       this.setState({
         POSTModel: { text: "" },
       })
       //   this.fetchPostImage(data._id)
+      await postImage(this.state.post, response.data._id)
       this.handleClose()
     } else {
       console.log("something wrong with posting comment")
