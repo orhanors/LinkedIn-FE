@@ -2,21 +2,15 @@ import React from "react";
 import {
 	Navbar,
 	Container,
-	Form,
 	Nav,
-	FormControl,
 	Button,
-	InputGroup,
-	Alert,
 	Dropdown,
-	Row,
 	Badge,
 } from "react-bootstrap";
-import { Typeahead } from "react-bootstrap-typeahead";
+
 import "react-bootstrap-typeahead/css/Typeahead.css";
 
 import HomeIcon from "@material-ui/icons/Home";
-import { HiSearch } from "react-icons/hi";
 import WorkIcon from "@material-ui/icons/Work";
 import SmsIcon from "@material-ui/icons/Sms";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -70,15 +64,20 @@ class NavBar extends React.Component {
 		}
 	}
 	componentDidMount = () => {
-		this.getUserProfile();
-		this.getUsers();
+		if (
+			this.props.location.pathname !== "/auth/login" ||
+			this.props.location.pathname !== "/auth/signup"
+		) {
+			this.getUserProfile();
+			this.getUsers();
+		}
 	};
 	CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 		<p>
 			{children}
 			<RiArrowDownSFill
 				className='m-0 p-0'
-				style={{ fontSize: "17px" }}
+				style={{ fontSize: "16px" }}
 				onClick={(e) => {
 					e.preventDefault();
 					onClick(e);
@@ -126,74 +125,7 @@ class NavBar extends React.Component {
 						</Link>
 						<Navbar.Toggle aria-controls='basic-navbar-nav' />
 						<Navbar.Collapse id='basic-navbar-nav'>
-							<Form inline>
-								<InputGroup style={{ width: "240px" }}>
-									<Typeahead
-										labelKey={(option) =>
-											`${option.username}`
-										}
-										onChange={(selected) => {
-											// here you can handle on item click
-											alert(selected);
-										}}
-										renderMenuItemChildren={(
-											option,
-											props,
-											index
-										) => {
-											// here design your user display
-
-											return (
-												<>
-													<div className='search-item d-flex align-items-center justify-content-start py-3 px-3 mb-2'>
-														<div></div>
-														<div className='ml-3'>
-															{/* <link to={`/profile/${option._id}`}> */}{" "}
-															<p
-																className='mb-0'
-																onClick={() =>
-																	this.props.history.push(
-																		"/profile/" +
-																			option._id
-																	)
-																}>
-																{option.name}
-															</p>{" "}
-															{/* </link> */}
-															<p className='mb-0'>
-																{" "}
-																{option.surname}
-															</p>
-															<p className='mb-0'>
-																{option.title}
-															</p>
-														</div>
-													</div>
-												</>
-											);
-										}}
-										open={this.state.users.length > 0}
-										onInputChange={(text) => {
-											if (text.length > 3) {
-												const filtered = this.state.rawUsers.filter(
-													(user) =>
-														user.username
-															.toLowerCase()
-															.includes(
-																text.toLowerCase()
-															)
-												);
-												this.setState({
-													users: filtered,
-												});
-											} else {
-												this.setState({ users: [] });
-											}
-										}}
-										options={this.state.users}
-									/>
-								</InputGroup>
-							</Form>
+							{/* TODO:SEARCH FUNC HERE */}
 
 							<Nav className='ml-auto'>
 								<Link to='/'>
@@ -202,7 +134,7 @@ class NavBar extends React.Component {
 										<p>Home</p>
 									</div>
 								</Link>
-								<Nav.Link href='#' className='nav-link'>
+								<Nav.Link className='nav-link'>
 									<div
 										onClick={() =>
 											this.setState({
@@ -229,15 +161,15 @@ class NavBar extends React.Component {
 										<p>My Network</p>
 									</div>
 								</Nav.Link>
-								<Nav.Link href='#' className='nav-link'>
+								<Nav.Link className='nav-link'>
 									<WorkIcon />
 									<p>Jobs</p>
 								</Nav.Link>
-								<Nav.Link href='#' className='nav-link'>
+								<Nav.Link className='nav-link'>
 									<SmsIcon />
 									<p>Messaging</p>
 								</Nav.Link>
-								<Nav.Link href='#' className='nav-link'>
+								<Nav.Link className='nav-link'>
 									<NotificationsIcon />
 									<p>Notifications</p>
 								</Nav.Link>
@@ -255,7 +187,9 @@ class NavBar extends React.Component {
 											id='dropdown-custom-components'></Dropdown.Toggle>
 										<Dropdown.Menu
 											id='meMenu'
-											style={{ minWidth: "300px" }}>
+											style={{
+												minWidth: "300px",
+											}}>
 											{this.state.myProfile ? (
 												<>
 													<Dropdown.Item
@@ -285,14 +219,14 @@ class NavBar extends React.Component {
 																			.myProfile
 																			.surname}
 																</h6>
-																<h6>
+																<p>
 																	{
 																		this
 																			.state
 																			.myProfile
 																			.title
 																	}
-																</h6>
+																</p>
 															</div>
 														</div>
 													</Dropdown.Item>
@@ -363,7 +297,7 @@ class NavBar extends React.Component {
 								</Link>
 							</Nav>
 							<Nav className='second-nav'>
-								<Nav.Link href='#' className='nav-link'>
+								<Nav.Link className='nav-link'>
 									<CgMenuGridR />
 									<p>
 										Work{" "}
@@ -374,7 +308,6 @@ class NavBar extends React.Component {
 									</p>
 								</Nav.Link>
 								<Nav.Link
-									href='#'
 									className='nav-link'
 									style={{
 										maxWidth: "70px",

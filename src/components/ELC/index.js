@@ -5,7 +5,7 @@ import { Card, Row, Col, ListGroup } from "react-bootstrap";
 import Moment from "react-moment";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
-export default class extends React.Component {
+export default class ELC extends React.Component {
 	state = { MyExperience: this.props.MyExperience, visible: 3 };
 
 	loadmore = () =>

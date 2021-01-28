@@ -1,6 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,100;1,400;1,700&display=swap");
 body {
 	background-color: #f3f2ef;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+}
+
+a:hover {
+	color: inherit !important;
+}
+
+a {
+	color: inherit !important;
 }
 .top-settings {
 	border-radius: 0.4rem;
@@ -92,23 +102,7 @@ i.fas.fa-plus:hover {
 	border-radius: 50%;
 	background-color: rgb(243, 203, 203);
 }
-.ProfileCardImg {
-	height: 20%;
-}
-.ProfileCard {
-	border-top: 0.7rem solid gold;
-}
-.avatarProfile {
-	background-color: white;
-	padding: 2px;
-	width: 10rem;
-	height: auto;
-	margin-top: -10%;
-	width: 68px;
-	height: 68px;
-	object-fit: cover;
-	border-radius: 50%;
-}
+
 .gold-box {
 	color: gold;
 }

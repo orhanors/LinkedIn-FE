@@ -1,0 +1,28 @@
+.viewed-container {
+	color: black;
+	.title {
+		font-size: 16px;
+		line-height: 24px;
+		font-weight: 700;
+	}
+	.link-title {
+		color: black !important;
+		font-weight: 600;
+		font-size: 14px;
+	}
+	.link-subtitle {
+		color: gray !important;
+		font-size: 12px;
+		font-weight: 600 !important;
+	}
+
+	.link-number {
+		color: black !important;
+		font-weight: 700;
+	}
+	.link-bottom {
+		color: rgb(99, 99, 99) !important;
+		font-weight: 700;
+		font-size: 14px;
+	}
+}

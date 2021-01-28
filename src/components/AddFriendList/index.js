@@ -7,7 +7,7 @@ function AddFriendList(props) {
 	//list-group-item
 	useEffect(() => {
 		setFriendRequestList(props.currentUserProfile.friendRequests);
-	}, [props.currentUserProfile]);
+	}, [props.currentUserProfile.friendRequests, props.currentUserProfile]);
 	const changeBehavior = (e) => {
 		e.target.closest(`.list-group-item`).style.display = "none";
 		props.updateNavBar();
