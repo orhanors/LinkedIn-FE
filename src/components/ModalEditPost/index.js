@@ -26,84 +26,23 @@ class ModalEditPost extends React.Component {
     })
   }
 
-  //   componentDidUpdate = (previousProps) => {
-  //     if (previousProps.post.text !== this.props.post.text) {
-  //       this.setState({
-  //         postEdit: { text: this.props.post.text },
-  //       })
-  //     }
-  //   }
-
-  componentDidUpdate = (previousProps, previousState) => {
-    if (
-      previousProps.post.text !== this.props.post.text ||
-      previousState.post != this.state.post
-    ) {
-      console.log(previousState.post, this.state.post)
+  componentDidUpdate = (previousProps) => {
+    if (previousProps.post.text !== this.props.post.text) {
       this.setState({
         postEdit: { text: this.props.post.text },
-        post: this.state.post,
       })
     }
   }
 
   delete = async () => {
     const response = await deletePost(this.props.post._id)
-    if (response.data) {
-      alert("Post deleted successfully")
+    if (response) {
+      console.log("Post deleted successfully")
+      this.props.feedCounter()
+
       this.props.onHide()
     } else {
-      const error = response.error
-      console.log(error)
-    }
-  }
-
-  //   deletePost = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://striveschool-api.herokuapp.com/api/posts/${this.props.post._id}`,
-  //         {
-  //           method: "DELETE",
-  //           headers: {
-  //             Authorization: process.env.REACT_APP_TOKEN,
-  //           },
-  //         }
-  //       )
-  //       if (response.ok) {
-  //         alert("Post DELETED successfully")
-  //         this.props.feedCounter()
-  //         this.props.onHide()
-  //       } else {
-  //         const error = await response.json()
-  //         console.log(error)
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  fetchPostImage = async (id) => {
-    try {
-      let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/` + id,
-        {
-          method: "POST",
-          body: this.state.post,
-
-          headers: {
-            //"Content-Type": "application/json",
-            Authorization: process.env.REACT_APP_TOKEN,
-          },
-        }
-      )
-      if (response.ok) {
-        console.log("OK")
-        this.props.feedCounter()
-      } else {
-        const error = await response.json()
-        console.log(error)
-        ;<Alert variant="danger">Something went wrong</Alert>
-      }
-    } catch (error) {
+      const error = response
       console.log(error)
     }
   }
@@ -111,12 +50,18 @@ class ModalEditPost extends React.Component {
   edit = async (e) => {
     e.preventDefault()
     const response = await editPost(this.state.postEdit, this.props.post._id)
+    this.props.feedCounter()
     if (response.data) {
       this.props.feedCounter()
-      alert(`post edited SUCCESFULLY`)
+      console.log(`post edited SUCCESFULLY`)
       if (this.state.post !== null) {
-        this.props.feedCounter()
-        postImage(this.state.post, this.props.post._id)
+        const imagePosted = await postImage(
+          this.state.post,
+          this.props.post._id
+        )
+        if (imagePosted) {
+          this.props.feedCounter()
+        }
       }
       this.props.onHide()
     } else {
@@ -125,40 +70,6 @@ class ModalEditPost extends React.Component {
     }
   }
 
-  //   editFetch = async (e) => {
-  //     e.preventDefault()
-  //     try {
-  //       console.log(this.state.postEdit)
-  //       let response = await fetch(
-  //         process.env.REACT_APP_BE_URL + "/posts/" + this.props.post._id,
-  //         {
-  //           method: "PUT",
-  //           body: JSON.stringify(this.state.postEdit),
-
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             // Authorization: process.env.REACT_APP_TOKEN,
-  //             // "Access-Control-Allow-Origin": "*",
-  //           },
-  //         }
-  //       )
-  //       if (response.ok) {
-  //         const data = await response.json()
-  //         this.props.feedCounter()
-  //         alert(`post edited SUCCESFULLY`)
-  //         if (this.state.post !== null) {
-  //           this.fetchPostImage(data._id)
-  //         }
-
-  //         this.props.onHide()
-  //       } else {
-  //         const error = await response.json()
-  //         console.log(error)
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
   render() {
     return (
       <Modal show={this.props.show} onHide={() => this.props.onHide()}>
