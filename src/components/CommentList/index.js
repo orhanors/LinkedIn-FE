@@ -1,9 +1,8 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
-import { Spinner, Alert } from "react-bootstrap";
+
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+
 class CommentList extends React.Component {
 	state = {
 		comments: [],

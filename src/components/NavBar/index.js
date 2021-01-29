@@ -58,7 +58,6 @@ class NavBar extends React.Component {
 			});
 
 			this.setState({ searchedUsers: searchResult });
-			console.log("search result: ", this.state.searchedUsers);
 		}
 	};
 

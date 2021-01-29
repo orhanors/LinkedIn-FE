@@ -83,8 +83,6 @@ class Feed extends React.Component {
 	};
 
 	updateCommentField = (e, postId) => {
-		console.log("e: ", e);
-		console.log("pstID: ", postId);
 		if (e.keyCode === 13 || e.key === "Enter") {
 			e.preventDefault();
 			this.submitComment(postId);
