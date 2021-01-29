@@ -14,7 +14,7 @@ class AddFeed extends React.Component {
 		return (
 			<Card className='add-your-feed mb-2'>
 				<Card.Body>
-					<div className='d-flex justify-content-between'>
+					<div className='d-flex'>
 						<p className='title'>Add to your feed</p>
 						<Link>
 							<InfoIcon style={{ width: 20 }} />

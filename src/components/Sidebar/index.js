@@ -79,7 +79,7 @@ class Sidebar extends React.Component {
 						<Advertise />
 					</Col>
 				</Row>
-				<Row>
+				{/* <Row>
 					<Col>
 						<Know
 							oneProps={this.state.arr1}
@@ -94,7 +94,7 @@ class Sidebar extends React.Component {
 							fourProps={this.state.arr4}
 						/>
 					</Col>
-				</Row>
+				</Row> */}
 				<Row>
 					<Col>
 						<Videos />

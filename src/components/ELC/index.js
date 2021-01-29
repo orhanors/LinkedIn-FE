@@ -114,7 +114,7 @@ export default class ELC extends React.Component {
 						</ListGroup.Item>
 					)}
 				</Card>
-				<Card className='p-4'>
+				<Card className='p-4 mt-4'>
 					<Card.Body>
 						<Row>
 							<Col
@@ -123,9 +123,11 @@ export default class ELC extends React.Component {
 								<Card.Title>
 									Licenses and Certifications
 								</Card.Title>
-								{this.props.me && (
-									<h3 className='text-primary'>+</h3>
-								)}
+								<PlusEdit
+									color='#0b67c2'
+									me={this.props.me}
+									onClicked={this.props.onClicked}
+								/>
 							</Col>
 						</Row>
 						<Row>
@@ -135,7 +137,7 @@ export default class ELC extends React.Component {
 										<div className='d-flex align-items-center '>
 											<div>
 												<img
-													src='https://placehold.it/300x300'
+													src='https://fuzati.com/wp-content/uploads/2016/12/CSS-Logo.png'
 													alt='placeholder'
 													width='56px'
 													height='56px'
@@ -152,53 +154,19 @@ export default class ELC extends React.Component {
 											/>
 										</div>
 									</ListGroup.Item>
-									<ListGroup.Item className='d-flex align-items-center'>
+									<ListGroup.Item className='d-flex align-items-center justify-content-between'>
+										<div className='d-flex align-items-center '>
 										<div>
 											<img
-												src='https://placehold.it/300x300'
+												src='http://www.bluesuitsonline.com/images/dresses/WSJ.jpg'
 												alt='placeholder'
 												width='56px'
 											/>
 										</div>
 										<div className='ml-2'>
 											<h6>Journalist</h6>
-										</div>
-									</ListGroup.Item>
-								</ListGroup>
-							</Col>
-						</Row>
-					</Card.Body>
-				</Card>
-				<Card className='p-4'>
-					<Card.Body>
-						<Row>
-							<Col
-								className='d-flex justify-content-between align-items-center'
-								xs={12}>
-								<Card.Title>
-									Licenses and Certifications
-								</Card.Title>{" "}
-								{this.props.me && (
-									<h3 className='text-primary'>+</h3>
-								)}
-							</Col>
-						</Row>
-						<Row>
-							<Col xs={12}>
-								<ListGroup className='d-flex' variant='flush'>
-									<ListGroup.Item className='d-flex align-items-center justify-content-between'>
-										<div className='d-flex align-items-center justify-content-between'>
-											<div>
-												<img
-													src='https://placehold.it/300x300'
-													alt='placeholder'
-													width='56px'
-												/>
 											</div>
-											<div className='ml-2'>
-												<h6>Learning ECMA scripts</h6>
 											</div>
-										</div>
 										<div>
 											<PencilEdit
 												me={this.props.me}
@@ -206,23 +174,12 @@ export default class ELC extends React.Component {
 											/>
 										</div>
 									</ListGroup.Item>
-									<ListGroup.Item className='d-flex align-items-center'>
-										<div>
-											<img
-												src='https://placehold.it/300x300'
-												alt='placeholder'
-												width='56px'
-											/>
-										</div>
-										<div className='ml-2'>
-											<h6>Learning ECMA scripts</h6>
-										</div>
-									</ListGroup.Item>
 								</ListGroup>
 							</Col>
 						</Row>
 					</Card.Body>
 				</Card>
+				
 			</>
 		);
 	}

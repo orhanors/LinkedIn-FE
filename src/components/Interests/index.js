@@ -18,7 +18,7 @@ export default class Interests extends React.Component {
 							<Col className='d-flex' md={6}>
 								<div>
 									<img
-										src='https://placehold.it/300x300'
+										src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/TE_Connectivity_logo.svg/1200px-TE_Connectivity_logo.svg.png'
 										alt='placeholder'
 										width='56px'
 									/>
@@ -36,7 +36,7 @@ export default class Interests extends React.Component {
 							<Col className='d-flex ' md={6}>
 								<div>
 									<img
-										src='https://placehold.it/300x300'
+										src='https://www.ozartsnashville.org/wp-content/uploads/2016/08/ubs-logo.jpg'
 										alt='placeholder'
 										width='56px'
 									/>
@@ -56,7 +56,7 @@ export default class Interests extends React.Component {
 							<Col className='d-flex' md={6}>
 								<div>
 									<img
-										src='https://placehold.it/300x300'
+										src='https://malignel.transilien.com/wp-content/uploads/2014/04/information-logo.png'
 										alt='placeholder'
 										width='56px'
 									/>
@@ -74,7 +74,7 @@ export default class Interests extends React.Component {
 							<Col className='d-flex ' md={6}>
 								<div>
 									<img
-										src='https://placehold.it/300x300'
+										src='http://im.gifbt.com/in/business-analyst-world/business-analyst-world-logo-125x125.jpg'
 										alt='placeholder'
 										width='56px'
 									/>
