@@ -10,35 +10,35 @@ class Videos extends React.Component {
 				<Card className='youknow'>
 					<Card.Body>
 						<Container>
-							<p>
+							<p align='justify' style={{ fontSize:'14px'}}>
 								User, learn what hiring managers look for in
 								answers to top interview questions
 							</p>
 						</Container>
 						<Row>
-							<Col className=' d-flex px-2 py-2 justify-content-center align-items-center'>
+							<Col className=' bordered d-flex px-2 py-2 justify-content-center align-items-center'>
 								<PlayCircleOutlineIcon />
 							</Col>
 							<Col
-								xs={7}
+								xs={10}
 								className='bordered d-flex px-2 py-2 justify-content-start align-items-center'>
 								<div>
-									<h5>Do you have any question for me?</h5>
+									<h6>Do you have any question?</h6>
 								</div>
 							</Col>
 						</Row>
 						<Row>
-							<Col className=' d-flex px-2 py-2 justify-content-center align-items-center'>
+							<Col className=' bordered d-flex px-2 py-2 justify-content-center align-items-center'>
 								<PlayCircleOutlineIcon />
 							</Col>
 							<Col
-								xs={7}
+								xs={10}
 								className='bordered d-flex px-2 py-2 justify-content-start align-items-center'>
 								<div>
-									<h5>
+									<h6>
 										Tell me about a time you disagreed with
 										someone.
-									</h5>
+									</h6>
 								</div>
 							</Col>
 						</Row>
@@ -47,15 +47,15 @@ class Videos extends React.Component {
 								<PlayCircleOutlineIcon />
 							</Col>
 							<Col
-								xs={7}
-								className='bordered d-flex px-2 py-2 justify-content-start align-items-center'>
+								xs={10}
+								className=' d-flex px-2 py-2 justify-content-start align-items-center'>
 								<div>
-									<h4>Why should we hire you?</h4>
+									<h6>Why should we hire you?</h6>
 								</div>
 							</Col>
 						</Row>
 					</Card.Body>
-					<Card.Header className=' d-flex px-2 py-2 justify-content-center align-items-center'>
+					<Card.Header className='d-flex px-2 py-2 justify-content-center align-items-center'>
 						<div>See all questions</div>
 					</Card.Header>
 				</Card>

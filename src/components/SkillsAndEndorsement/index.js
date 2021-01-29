@@ -1,37 +1,74 @@
 import React from "react";
 import { Card, Row, Col, Button, ListGroup } from "react-bootstrap";
-import PencilEdit from "../PencilEdit";
+import PencilEdit from "../PencilEdit"; 
+import PlusEdit from "../PlusEdit"
 
 function SkillsAndEndorsement(props) {
 	return (
-		<Card className='mt-4'>
-			<Row className=' p-4'>
-				<Col md={6}>
-					<h4 className='text-dark'>Skills & endorsements</h4>
-					<Button
+		<Card className='mt-4 p-4'>
+			<Card.Body>
+			<Row>
+				<Col className='d-flex justify-content-between align-items-center'
+						xs={12}>
+						<Card.Title>
+							Skills & endorsements
+							</Card.Title>
+						<PlusEdit
+									color='#0b67c2'
+									me={props.me}
+									onClicked={props.onClicked}
+								/>
+					</Col>
+				<Col xs={12} className=' d-flex  endorsement'>
+						<Button
 						variant='outline-primary'
-						className='rounded-pill mt-3 p-1 px-4'>
+						className='rounded-pill p-1 px-4'>
 						Take skill quiz
 					</Button>
 				</Col>
-				<Col md={6} className=' d-flex justify-content-end endorsement'>
-					<div>
-						{props.me && (
-							<h5 className='text-secondary'>Add a new Skill</h5>
-						)}
-					</div>
-					<div className='endorsement'>
-						<PencilEdit color='#0b67c2' me={props.me} />
-					</div>
-				</Col>
 				<Col xs={12}>
 					<ListGroup
-						variant='flush'
-						className='mt-3 text-dark'
-						style={{ fontWeight: "bold" }}>
-						<ListGroup.Item>Software engineer</ListGroup.Item>
-						<ListGroup.Item>JavaScript</ListGroup.Item>
-						<ListGroup.Item>React JS</ListGroup.Item>
+						className='d-flex mt-3'
+						variant='flush'>
+						<ListGroup.Item className='d-flex align-items-center justify-content-between'>
+							<div className='d-flex align-items-center '>
+											<div className='ml-2'>
+												<h6>Software Engineering</h6>
+											</div>
+										</div>
+										<div>
+											<PencilEdit
+												me={props.me}
+												color='#0b67c2'
+											/>
+										</div>
+						</ListGroup.Item>
+						<ListGroup.Item className='d-flex align-items-center justify-content-between'>
+							<div className='d-flex align-items-center '>
+											<div className='ml-2'>
+												<h6>Javascript</h6>
+											</div>
+										</div>
+										<div>
+											<PencilEdit
+												me={props.me}
+												color='#0b67c2'
+											/>
+										</div>
+						</ListGroup.Item>
+						<ListGroup.Item className='d-flex align-items-center justify-content-between'>
+							<div className='d-flex align-items-center '>
+											<div className='ml-2'>
+												<h6>React JS</h6>
+											</div>
+										</div>
+										<div>
+											<PencilEdit
+												me={props.me}
+												color='#0b67c2'
+											/>
+										</div>
+						</ListGroup.Item>
 					</ListGroup>
 				</Col>
 			</Row>
@@ -39,7 +76,8 @@ function SkillsAndEndorsement(props) {
 				className='text-primary text-center'
 				style={{ fontWeight: "bold" }}>
 				Show more <i className='fas fa-caret-down'></i>
-			</Card.Footer>
+				</Card.Footer>
+				</Card.Body>
 		</Card>
 	);
 }

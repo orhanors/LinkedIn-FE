@@ -1,16 +1,19 @@
 .add-your-feed {
-	.title {
-		font-size: 16px;
-		line-height: 24px;
-		font-weight: 700;
-	}
-	.right-subtitle {
-		color: gray;
-		font-size: 12px;
-		font-weight: 400;
-	}
-	.bottom-text {
-		color: rgb(121, 121, 121);
-		font-weight: 700;
-	}
+  .title {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+  .right-subtitle {
+    color: gray;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .bottom-text {
+    //color: rgb(121, 121, 121);
+    //font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.2rem;
+    list-style: height 1.333;
+  }
 }
