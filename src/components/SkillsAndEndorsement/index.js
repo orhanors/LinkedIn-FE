@@ -22,7 +22,7 @@ function SkillsAndEndorsement(props) {
 				<Col xs={12} className=' d-flex  endorsement'>
 						<Button
 						variant='outline-primary'
-						className='rounded-pill ml-3'>
+						className='rounded-pill ml-3 p-1 px-4'>
 						Take skill quiz
 					</Button>
 				</Col>
