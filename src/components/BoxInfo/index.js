@@ -93,12 +93,12 @@ class BoxInfo extends React.Component {
 					</div>
 					<div className='d-flex justify-content-between mt-4'>
 						<div>
-							<h3
+							<p
 								className='text-dark'
-								style={{ fontWeight: "normal" }}>
+								style={{ fontWeight: "700" }}>
 								{this.props.myProfile.name}{" "}
 								{this.props.myProfile.surname}
-							</h3>
+							</p>
 							<h5
 								className='text-secondary'
 								style={{ fontWeight: "normal" }}>

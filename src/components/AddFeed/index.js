@@ -39,13 +39,13 @@ class AddFeed extends React.Component {
 								</p>
 							</div>
 						</Col>
-						<Col
+						{/* <Col
 							xs={3}
 							className=' d-flex px-2 py-2 justify-content-start align-items-center'>
 							<div className='p-1'>
 								<strong>+ Follow</strong>
 							</div>
-						</Col>
+						</Col> */}
 					</Row>
 					<Row>
 						<Col className=' d-flex px-2 py-2 justify-content-center align-items-center'>
@@ -72,13 +72,13 @@ class AddFeed extends React.Component {
 								</p>
 							</div>
 						</Col>
-						<Col
+						{/* <Col
 							xs={3}
 							className=' d-flex px-2 py-2 justify-content-start align-items-center'>
 							<div to='#' className='p-1'>
 								<strong>+ Follow</strong>
 							</div>
-						</Col>
+						</Col> */}
 					</Row>
 					<Row>
 						<Col className=' d-flex px-2 py-2 justify-content-center align-items-center'>
@@ -105,13 +105,13 @@ class AddFeed extends React.Component {
 								</p>
 							</div>
 						</Col>
-						<Col
+						{/* <Col
 							xs={3}
 							className=' d-flex px-2 py-2 justify-content-start align-items-center'>
 							<div to='#' className='p-1'>
 								<strong>+ Follow</strong>
 							</div>
-						</Col>
+						</Col> */}
 					</Row>
 					<hr />
 					<Row>

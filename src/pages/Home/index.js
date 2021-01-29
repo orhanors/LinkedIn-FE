@@ -29,7 +29,7 @@ export default class Home extends Component {
 		return (
 			<Container>
 				<Row>
-					<Col md={{ span: 2 }} style={{ paddingLeft: "0 " }}>
+					<Col md={{ span: 3 }} style={{ paddingLeft: "0 " }}>
 						<FeedSideLeft
 							width='15%'
 							meProfile={this.state.meProfile}
@@ -155,7 +155,7 @@ export default class Home extends Component {
 							/>
 						</Container>
 					</Col>
-					<Col md={{ span: 4 }} style={{ padding: "0 " }}>
+					<Col md={{ span: 3 }} style={{ padding: "0 " }}>
 						<FeedSideRight />
 					</Col>
 				</Row>
