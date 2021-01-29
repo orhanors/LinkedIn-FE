@@ -280,7 +280,13 @@ class Feed extends React.Component {
 															? "inline-block"
 															: "none",
 												}}></i>
-											<p className='mt-3'>
+											<p
+												className='mt-3'
+												style={{
+													color: "gray",
+													fontWeight: "400",
+													fontSize: "12px",
+												}}>
 												{post.likes.length === 0
 													? " "
 													: post.likes.length}
@@ -319,15 +325,7 @@ class Feed extends React.Component {
 											Send
 										</span>
 									</div>
-									<div
-										style={{
-											// display: this.state.comments.includes(post._id)
-											display:
-												post.comments &&
-												post.comments.length > 0
-													? "block"
-													: "none",
-										}}>
+									<div>
 										<div
 											className={
 												this.state.showComment
@@ -346,17 +344,18 @@ class Feed extends React.Component {
 												}
 												postId={post._id}
 											/>
-										</div>
-										<div>
-											<CommentList
-												fetchComment={
-													this.state.fetchComment
-												}
-												submittedSize={
-													this.state.submittedSize
-												}
-												postId={post._id}
-											/>
+
+											<div>
+												<CommentList
+													fetchComment={
+														this.state.fetchComment
+													}
+													submittedSize={
+														this.state.submittedSize
+													}
+													postId={post._id}
+												/>
+											</div>
 										</div>
 									</div>
 								</Card>
