@@ -9,12 +9,6 @@ import { getLocalStorage } from "../../helpers/localStorage"
 class Feed extends React.Component {
   state = {
     posts: [],
-    // like: localStorage.getItem("likes").split(","),
-    // like:
-    //   localStorage.getItem("likes") && localStorage.getItem("likes").length > 0
-    //     ? localStorage.getItem("likes").split(",")
-    //     : // localStorage.getItem("likes")
-    //       " ",
     comments: [],
     loading: true,
     userName: getLocalStorage("user").username,
@@ -46,9 +40,7 @@ class Feed extends React.Component {
   handleLike = async (postId) => {
     try {
       const post = this.state.posts.find((post) => post._id === postId)
-
       if (post.likes && post.likes.length > 0) {
-        console.log("likes array", post.likes)
         const isPostLiked = post.likes.find(
           (like) => like.userId === this.state.userId.userId
         )
@@ -57,17 +49,11 @@ class Feed extends React.Component {
           console.log(
             `you already liked this post. It has a total of ${post.likes.length} likes`
           )
-
-          //implement DELETE Like here
-
           const likeDeleted = await deleteLike(postId, isPostLiked._id)
           this.props.changeCounter()
-          console.log(likeDeleted)
         } else {
-          //addlike here
           const likeAdded = await addLike(postId, this.state.userId)
           this.props.changeCounter()
-
           console.log(
             "you haven't like this post but now you do. Here you go",
             likeAdded
@@ -76,51 +62,12 @@ class Feed extends React.Component {
       } else {
         const likeAdded = await addLike(postId, this.state.userId)
         this.props.changeCounter()
-
-        console.log("yoy are the first one to like this post", likeAdded)
+        console.log("you are the first one to like this post", likeAdded)
       }
     } catch (err) {
       console.log(err)
     }
   }
-
-  // addLike = async (postId) => {
-  //   try {
-  //     let response = await fetch(
-  //       `${process.env.REACT_APP_BE_URL}/posts/${postId}/likes`,
-  //       {
-  //         method: "POST",
-  //         body: JSON.stringify(this.state.userId),
-  //         headers: new Headers({
-  //           "Content-Type": "application/json",
-  //           // Authorization: process.env.REACT_APP_TOKEN,
-  //         }),
-  //       }
-  //     )
-  //     if (response.ok) {
-  //       console.log("like added", response)
-  //     } else {
-  //       console.log("something went wrong", response)
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // handleLikes = (id) => {
-  //   let likes = []
-  //   if (this.state.like.includes(id)) {
-  //     likes = this.state.like.filter((el) => el !== id)
-  //     this.setState({
-  //       like: likes,
-  //     })
-  //   } else {
-  //     likes = [...this.state.like, id]
-  //     this.setState({ like: likes })
-  //   }
-
-  //   localStorage.setItem("likes", likes)
-  // }
 
   handleComments = (id) => {
     this.setState({
@@ -144,18 +91,8 @@ class Feed extends React.Component {
       const isLiked = post.likes.find(
         (like) => like.userId === this.state.userId.userId
       )
-
-      if (isLiked) {
-        console.log("post already liked", isLiked)
-        return true
-      } else {
-        console.log("post not liked", isLiked)
-        return false
-      }
-    } else {
-      console.log("post not liked")
-      return false
-    }
+      return isLiked ? true : false
+    } else return false
   }
 
   populateFeed = async () => {
@@ -342,11 +279,10 @@ class Feed extends React.Component {
                           post.likes && post.likes.length > 0
                             ? "inline-block"
                             : "none",
-                        // this.state.like.includes(post._id)
-                        //   ? "inline-block"
-                        //   : "none",
                       }}
-                    ></i>
+                    >
+                      {post.likes.length}
+                    </i>
                   </div>
 
                   <div
@@ -379,7 +315,8 @@ class Feed extends React.Component {
                   <div
                     style={{
                       // display: this.state.comments.includes(post._id)
-                      display: this.isPostLiked(post._id) ? "block" : "none",
+                      display:
+                        post.likes && post.likes.length > 0 ? "block" : "none",
                     }}
                   >
                     <div

@@ -26,31 +26,39 @@ class ModalEditPost extends React.Component {
     })
   }
 
-  //   componentDidUpdate = (previousProps) => {
-  //     if (previousProps.post.text !== this.props.post.text) {
-  //       this.setState({
-  //         postEdit: { text: this.props.post.text },
-  //       })
-  //     }
+  // componentDidUpdate = (previousProps) => {
+  //   if (previousProps.feedCounter !== this.props.feedCounter) {
+  //     this.setState({
+  //       postEdit: { text: this.props.post.text },
+  //     })
   //   }
+  // }
 
-  componentDidUpdate = (previousProps, previousState) => {
-    if (
-      previousProps.post.text !== this.props.post.text ||
-      previousState.post != this.state.post
-    ) {
-      console.log(previousState.post, this.state.post)
+  componentDidUpdate = (previousProps) => {
+    if (previousProps.post.text !== this.props.post.text) {
       this.setState({
         postEdit: { text: this.props.post.text },
-        post: this.state.post,
       })
     }
   }
 
+  // componentDidUpdate = (previousProps, previousState) => {
+  //   if (
+  //     previousProps.post.text !== this.props.post.text ||
+  //     previousState.post != this.state.post
+  //   ) {
+  //     console.log(previousState.post, this.state.post)
+  //     this.setState({
+  //       postEdit: { text: this.props.post.text },
+  //       post: this.state.post,
+  //     })
+  //   }
+  // }
+
   delete = async () => {
     const response = await deletePost(this.props.post._id)
     if (response.data) {
-      alert("Post deleted successfully")
+      console.log("Post deleted successfully")
       this.props.onHide()
     } else {
       const error = response.error
@@ -97,7 +105,6 @@ class ModalEditPost extends React.Component {
       )
       if (response.ok) {
         console.log("OK")
-        this.props.feedCounter()
       } else {
         const error = await response.json()
         console.log(error)
@@ -111,12 +118,18 @@ class ModalEditPost extends React.Component {
   edit = async (e) => {
     e.preventDefault()
     const response = await editPost(this.state.postEdit, this.props.post._id)
+    this.props.feedCounter()
     if (response.data) {
       this.props.feedCounter()
       alert(`post edited SUCCESFULLY`)
       if (this.state.post !== null) {
-        this.props.feedCounter()
-        postImage(this.state.post, this.props.post._id)
+        const imagePosted = await postImage(
+          this.state.post,
+          this.props.post._id
+        )
+        if (imagePosted) {
+          this.props.feedCounter()
+        }
       }
       this.props.onHide()
     } else {
