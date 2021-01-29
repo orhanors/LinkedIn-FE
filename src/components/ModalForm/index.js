@@ -166,7 +166,11 @@ class ModalForm extends React.Component {
 										/>
 									</Form.Group>
 									<div className='submit-button float-right mr-3 '>
-										<Button type='submit'>Save </Button>
+										<button
+											className='profile-save-btn'
+											type='submit'>
+											Save{" "}
+										</button>
 									</div>
 								</Form>
 							</Container>
@@ -179,82 +183,3 @@ class ModalForm extends React.Component {
 }
 
 export default ModalForm;
-
-/************	<Form onSubmit={this.changeInfo}>
-							<Form.Group>
-								<Form.Label htmlFor='name'>Name</Form.Label>
-								<Form.Control
-									type='text'
-									placeholder='Enter your First Name'
-									id='name'
-									value={this.state.info.name}
-									onChange={(e) => this.handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group>
-								<Form.Label>Surname</Form.Label>
-								<Form.Control
-									type='text'
-									placeholder='Enter your Last Time'
-									id='surname'
-									value={this.state.info.surname}
-									onChange={(e) => this.handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group>
-								<Form.Label>Email</Form.Label>
-								<Form.Control
-									type='email'
-									placeholder='Enter your email'
-									id='email'
-									value={this.state.info.email}
-									onChange={(e) => this.handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group>
-								<Form.Label>Bio</Form.Label>
-								<Form.Control
-									as='textarea'
-									rows={3}
-									id='bio'
-									value={this.state.info.bio}
-									onChange={(e) => this.handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group>
-								<Form.Label>Title</Form.Label>
-								<Form.Control
-									type='text'
-									placeholder='Enter your Job Title'
-									id='title'
-									value={this.state.info.title}
-									onChange={(e) => this.handleChange(e)}
-								/>
-							</Form.Group>
-							<Form.Group>
-								<Form.Label>Area</Form.Label>
-								<Form.Control
-									type='text'
-									placeholder='City or Country'
-									id='area'
-									value={this.state.info.area}
-									onChange={(e) => this.handleChange(e)}
-								/>
-							</Form.Group>
-			
-							<Form.Group>
-							<Form.Label>username</Form.Label>
-							<Form.Control
-								type='text'
-								placeholder='username'
-								value={this.state.info.username}
-								onChange={(e) => this.handleChange(e)}
-							/>
-						</Form.Group>
-						<Button variant='primary' type='submit'>
-							Submit Changes
-						</Button>
-						{/* <Button variant="secondary" onClick={() => this.props.hide()}>
-			Close
-		  </Button>
-					</Form> */

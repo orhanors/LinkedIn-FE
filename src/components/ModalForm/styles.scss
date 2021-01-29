@@ -5,13 +5,30 @@
 
 .edit-profile-modal .modal-body {
 	max-height: calc(120vh - 280px) !important;
-
+	margin-bottom: 1rem !important;
 	overflow-y: auto !important;
+
+	.form-control {
+		font-size: 16px;
+	}
+	.form-label {
+		font-size: 14px;
+		font-weight: 400;
+	}
 }
 .edit-profile-modal .modal-dialog {
 	background-color: transparent !important;
 }
-
+.profile-save-btn {
+	background-color: #0a66c2;
+	color: white;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	border: none;
+	border-radius: 30px;
+}
 .images-container {
 	position: relative;
 }

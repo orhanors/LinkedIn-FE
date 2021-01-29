@@ -5,6 +5,7 @@ import {
 	editExperience,
 	addExperienceImage,
 } from "../../api/experience";
+import "./styles.scss";
 export default class ModalExperience extends Component {
 	state = {
 		experience: {
@@ -90,11 +91,6 @@ export default class ModalExperience extends Component {
 				const data = response.data;
 				console.log("exp data", data);
 
-				alert(
-					`Experience ${
-						this.props.editExp.experience._id ? "EDITED" : "ADDED"
-					} SUCCESFULLY`
-				);
 				this.props.submitExpCounter();
 
 				if (this.state.post !== null) {
@@ -120,7 +116,6 @@ export default class ModalExperience extends Component {
 				}
 			);
 			if (response.ok) {
-				alert("Exeperience DELETED successfully");
 				this.props.submitExpCounter();
 				this.props.hide();
 			} else {
@@ -136,10 +131,11 @@ export default class ModalExperience extends Component {
 		return (
 			<>
 				<Modal
+					className='experience-edit-modal'
 					show={this.props.showModalExperience}
 					onHide={() => this.props.hide()}>
 					<Modal.Header closeButton>
-						<Modal.Title>
+						<Modal.Title className='exp-modal-title'>
 							{this.props.editExp.experience._id
 								? "Edit Experience"
 								: "Add Experience"}
@@ -170,7 +166,7 @@ export default class ModalExperience extends Component {
 							<Form.Group>
 								<Form.Label>Start Date</Form.Label>
 								<Form.Control
-									type='text'
+									type='date'
 									placeholder='Enter your start date'
 									id='startDate'
 									value={this.state.experience.startDate}
@@ -180,7 +176,7 @@ export default class ModalExperience extends Component {
 							<Form.Group>
 								<Form.Label>End Date</Form.Label>
 								<Form.Control
-									type='text'
+									type='date'
 									placeholder='Enter your end date'
 									id='endDate'
 									value={this.state.experience.endDate}
@@ -217,12 +213,11 @@ export default class ModalExperience extends Component {
 										(this.fileInput = fileInput)
 									}
 								/>
-								<Button
-									className='rounded-pill mr-3 my-3 p-1 px-4 w-100'
-									variant='primary'
+								<button
+									className='upload-exp-img-btn mr-3 my-3 p-1 px-4 w-80'
 									onClick={() => this.fileInput.click()}>
-									Upload file
-								</Button>
+									Select file to your experience
+								</button>
 							</Form.Group>
 							<div className='d-flex justify-content-between '>
 								{this.props.editExp.experience._id && (
@@ -233,14 +228,13 @@ export default class ModalExperience extends Component {
 										Delete
 									</Button>
 								)}
-								<Button
-									className='rounded-pill p-1 px-4'
-									variant='primary'
+								<button
+									className='exp-save-btn rounded-pill p-1 px-4'
 									type='submit'>
 									{this.props.editExp.experience._id
 										? "Edit"
 										: "Save"}
-								</Button>
+								</button>
 							</div>
 						</Form>
 					</Modal.Body>

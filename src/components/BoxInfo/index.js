@@ -1,12 +1,13 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import BoxInfoButton from "../BoxInfoButton";
-import OpenToWork from "../OpenToWork";
+
 import PencilEdit from "../PencilEdit";
 import ModalProfilePicture from "../ModalProfilePicture";
 import AddFriendButton from "../AddFriendButton/index";
 import { getCurrentUser } from "../../api/profile";
 import { getLocalStorage } from "../../helpers/localStorage";
+import "./styles.scss";
 class BoxInfo extends React.Component {
 	state = {
 		showPictureModal: false,
@@ -94,18 +95,25 @@ class BoxInfo extends React.Component {
 					<div className='d-flex justify-content-between mt-4'>
 						<div>
 							<p
-								className='text-dark'
+								className='text-dark box-info-username'
 								style={{ fontWeight: "700" }}>
 								{this.props.myProfile.name}{" "}
 								{this.props.myProfile.surname}
 							</p>
-							<h5
-								className='text-secondary'
+							<p
+								className='text-secondary box-info-title'
 								style={{ fontWeight: "normal" }}>
 								{this.props.myProfile.title}
-							</h5>
+							</p>
 							<ul className='d-flex pl-0 '>
-								<li style={{ listStyle: "none" }}>
+								<li
+									className='box-info-area '
+									style={{
+										listStyle: "none",
+										fontWeight: "400",
+										fontSize: "16px",
+										color: "gray",
+									}}>
 									{this.props.myProfile.area}
 								</li>
 								<li
@@ -122,28 +130,33 @@ class BoxInfo extends React.Component {
 								</li>
 								<li
 									className='mx-3 text-primary'
-									style={{ fontWeight: "bold" }}>
+									style={{
+										fontWeight: "bold",
+										color: "#0a66c2 !important",
+									}}>
 									Contact info
 								</li>
 							</ul>
 						</div>
-						<div className='ml-0 pl-0 mr-5 pr-5'>
+						<div className='ml-5 pl-0 mr-0 pr-5'>
 							<div className='d-flex align-items-center'>
 								<img
 									src='https://strive.school/favicon.ico'
-									height='40px'
+									height='25px'
 									className='mr-2'
 									alt='strive'
 								/>
 								<a
 									href='https://www.linkedin.com/school/strive-school/'
-									style={{ color: "#666666" }}>
+									style={{
+										color: "#666666",
+										fontWeight: "400",
+									}}>
 									Strive School
 								</a>
 							</div>
 						</div>
 					</div>
-					{this.props.me && <OpenToWork me={this.props.me} />}
 				</Card.Body>
 			</Card>
 		);

@@ -1,0 +1,43 @@
+.experience-edit-modal .modal-content {
+	margin-bottom: 120%;
+	// margin-left: -50%;
+}
+
+.experience-edit-modal .modal-body {
+	max-height: calc(120vh - 280px) !important;
+	margin-bottom: 1rem !important;
+	overflow-y: auto !important;
+
+	.form-control {
+		font-size: 12px;
+	}
+	.form-label {
+		font-size: 14px;
+		font-weight: 400;
+	}
+}
+.experience-edit-modal .modal-dialog {
+	background-color: transparent !important;
+}
+.upload-exp-img-btn {
+	background-color: none;
+	color: #0a66c2;
+	border: none;
+	border-radius: 10px;
+	margin-left: 25%;
+}
+
+.upload-exp-img-btn:hover {
+	background-color: #0a66c271;
+	color: white;
+}
+
+.exp-save-btn {
+	background-color: #0a66c2;
+	color: white;
+	margin-left: 40%;
+}
+.exp-modal-title {
+	font-size: 16px;
+	font-weight: 600;
+}

@@ -58,6 +58,10 @@ class Profile extends React.Component {
 			this.getUser();
 		}
 
+		if (previousState.submitExpCounter !== this.state.submitExpCounter) {
+			this.getUser();
+		}
+
 		if (previousProps.match.params.id !== this.props.match.params.id) {
 			if (this.props.match.params.id === "me") {
 				this.props.changeMe();
