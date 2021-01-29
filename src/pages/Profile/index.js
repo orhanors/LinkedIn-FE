@@ -105,6 +105,11 @@ class Profile extends React.Component {
 							id={this.state.myProfile._id}
 							me={this.props.me}
 							myProfile={this.state.myProfile}
+							submitCounter={() =>
+								this.setState({
+									submitCounter: this.state.submitCounter + 1,
+								})
+							}
 							profileChangeCounter={this.state.submitCounter}
 							onClicked={() => {
 								this.setState({ show: true });
