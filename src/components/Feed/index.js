@@ -104,9 +104,9 @@ class Feed extends React.Component {
 
 	populateFeed = async () => {
 		const posts = await fetchPosts();
-		console.log("posts data", posts.data);
+		console.log("posts data", posts?.data);
 		if (posts.data.length > 0) {
-			this.setState({ posts: posts.data.reverse(), loading: false });
+			this.setState({ posts: posts?.data?.reverse(), loading: false });
 		}
 	};
 
