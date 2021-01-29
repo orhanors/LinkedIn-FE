@@ -78,7 +78,7 @@ class CommentList extends React.Component {
 	render() {
 		let body;
 
-		if (!this.state.isLoading && this.state.comments.length !== 0) {
+		if (!this.state.isLoading) {
 			body = (
 				<div className='mb-5'>
 					{this.state.comments.map((comment, index) => {
