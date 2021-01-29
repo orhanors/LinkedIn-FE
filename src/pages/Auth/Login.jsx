@@ -5,7 +5,7 @@ import isEmpty from "validator/lib/isEmpty";
 import { signin } from "../../api/auth";
 import { isAuthenticated, setAuth } from "../../helpers/auth";
 import "./auth.scss";
-function Login() {
+function Login(props) {
 	let history = useHistory();
 
 	//If the user is logged in, dont redirect him to signin page
@@ -54,7 +54,7 @@ function Login() {
 
 					if (isAuthenticated()) {
 						//redirect admin page
-
+						props.getCurrentUser();
 						history.push("/");
 					}
 				})

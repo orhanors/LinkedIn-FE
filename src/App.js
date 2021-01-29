@@ -10,13 +10,18 @@ import { Container, Row } from "react-bootstrap";
 import Profile from "./pages/Profile";
 import "./App.css";
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
+import { getCurrentUser } from "./api/profile";
+import { getLocalStorage } from "./helpers/localStorage";
 
 function App() {
 	const [me, setMe] = React.useState(null);
+	const [currentProfile, setCurrentProfile] = React.useState({});
+	const [submitUser, setSubmitUser] = React.useState(0);
+
 	return (
 		<div className='App'>
 			<Router>
-				<NavBar />
+				<NavBar submitUser={submitUser} />
 				<Container className='mt-5'>
 					<Row>
 						<Route
@@ -35,7 +40,16 @@ function App() {
 				</Container>
 				<ProtectedRoute path='/' exact component={Home} />
 				<Route path='/auth/signup' exact component={Signup} />
-				<Route path='/auth/login' exact component={Login} />
+				<Route
+					path='/auth/login'
+					exact
+					render={(props) => (
+						<Login
+							getCurrentUser={() => setSubmitUser(submitUser + 1)}
+							{...props}
+						/>
+					)}
+				/>
 
 				<Footer />
 			</Router>

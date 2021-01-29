@@ -60,7 +60,13 @@ class NavBar extends React.Component {
 			this.setState({ searchedUsers: searchResult });
 		}
 	};
-
+	getUserProfile = async () => {
+		const currentUserId = getLocalStorage("user")?._id;
+		const response = await getCurrentUser(currentUserId);
+		if (response.data) {
+			this.setState({ myProfile: response.data, loading: false });
+		}
+	};
 	getUsers = async () => {
 		const response = await getAllUsers();
 		if (response.data) {
@@ -69,28 +75,19 @@ class NavBar extends React.Component {
 			this.setState({ loading: false });
 		}
 	};
-	getUserProfile = async () => {
-		const currentUserId = getLocalStorage("user")?._id;
-		const response = await getCurrentUser(currentUserId);
-		if (response.data) {
-			this.setState({ myProfile: response.data, loading: false });
-		} else {
-			this.setState({ loading: false });
-		}
-	};
+
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.changeCounter !== this.state.changeCounter) {
 			this.getUserProfile();
 		}
+
+		if (prevProps.submitUser !== this.props.submitUser) {
+			this.getUserProfile();
+		}
 	}
 	componentDidMount = () => {
-		if (
-			this.props.location.pathname !== "/auth/login" ||
-			this.props.location.pathname !== "/auth/signup"
-		) {
-			this.getUserProfile();
-			this.getUsers();
-		}
+		this.getUsers();
+		this.getUserProfile();
 	};
 	CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 		<p>
