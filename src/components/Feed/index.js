@@ -101,15 +101,6 @@ class Feed extends React.Component {
     if (posts.data.length > 0) {
       this.setState({ posts: posts.data.reverse(), loading: false })
     }
-
-    // const postLikes = posts.data.map((post) => {
-    //   if (post.likes && post.likes.length > 0) return post.likes.length
-    // })
-    // console.log("post likes", postLikes)
-
-    // if (posts.data.likes && posts.data.likes.length > 0) {
-    //   console.log("single post likes", posts.data.likes)
-    // }
   }
 
   updateCommentField = (e, postId) => {
@@ -268,21 +259,24 @@ class Feed extends React.Component {
                       />
                     )}
                     <br />
-                    <i
-                      className="far fa-thumbs-up mt-2 p-2"
-                      style={{
-                        color: "#0a66c2",
-                        background: "#aacdf0",
-                        borderRadius: "50%",
+                    <div className="d-flex flex-row">
+                      <i
+                        className="far fa-thumbs-up mt-2 p-2"
+                        style={{
+                          color: "#0a66c2",
+                          // background: "#aacdf0",
+                          borderRadius: "50%",
 
-                        display:
-                          post.likes && post.likes.length > 0
-                            ? "inline-block"
-                            : "none",
-                      }}
-                    >
-                      {post.likes.length}
-                    </i>
+                          display:
+                            post.likes && post.likes.length > 0
+                              ? "inline-block"
+                              : "none",
+                        }}
+                      ></i>
+                      <p className="mt-3">
+                        {post.likes.length === 0 ? " " : post.likes.length}
+                      </p>
+                    </div>
                   </div>
 
                   <div
@@ -316,7 +310,9 @@ class Feed extends React.Component {
                     style={{
                       // display: this.state.comments.includes(post._id)
                       display:
-                        post.likes && post.likes.length > 0 ? "block" : "none",
+                        post.comments && post.comments.length > 0
+                          ? "block"
+                          : "none",
                     }}
                   >
                     <div
