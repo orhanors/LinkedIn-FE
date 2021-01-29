@@ -24,6 +24,7 @@ import { isAuthenticated, logout } from "../../helpers/auth";
 import { getLocalStorage } from "../../helpers/localStorage";
 import { getCurrentUser, getAllUsers } from "../../api/profile";
 import AddFriendList from "../AddFriendList";
+import ShowSearchResult from "../ShowSearchResult";
 
 class NavBar extends React.Component {
 	state = {
@@ -33,12 +34,32 @@ class NavBar extends React.Component {
 		searchText: "",
 		showFriendList: false,
 		changeCounter: 0,
+		showSearchResult: false,
+		searchedUsers: [],
 	};
 
 	handleLogout = () => {
 		logout(() => {
 			this.props.history.push("/auth/login");
 		});
+	};
+
+	handleSearch = (e) => {
+		const keyword = e.target.value;
+		if (keyword.length > 0) {
+			this.setState({ showSearchResult: true });
+		}
+		if (this.state.rawUsers.length > 0) {
+			const searchResult = this.state.rawUsers.filter((user) => {
+				return (
+					user.name.toLowerCase().includes(keyword.toLowerCase()) ||
+					user.surname.toLowerCase().includes(keyword.toLowerCase())
+				);
+			});
+
+			this.setState({ searchedUsers: searchResult });
+			console.log("search result: ", this.state.searchedUsers);
+		}
 	};
 
 	getUsers = async () => {
@@ -90,6 +111,13 @@ class NavBar extends React.Component {
 	showAuthNavBar = () => {
 		return (
 			<div>
+				<ShowSearchResult
+					hideSearchBar={() =>
+						this.setState({ showSearchResult: false })
+					}
+					show={this.state.showSearchResult}
+					users={this.state.searchedUsers}
+				/>
 				<AddFriendList
 					updateNavBar={() =>
 						this.setState({
@@ -125,7 +153,13 @@ class NavBar extends React.Component {
 						</Link>
 						<Navbar.Toggle aria-controls='basic-navbar-nav' />
 						<Navbar.Collapse id='basic-navbar-nav'>
-							{/* TODO:SEARCH FUNC HERE */}
+							{/* //TODO */}
+							<input
+								className='navbar-search-form'
+								type='textarea'
+								placeholder='Search...'
+								onChange={this.handleSearch}
+							/>
 
 							<Nav className='ml-auto'>
 								<Link to='/'>

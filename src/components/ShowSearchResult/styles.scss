@@ -1,0 +1,20 @@
+.search-result-container {
+	position: relative;
+	z-index: 1000;
+
+	.search-result-popup {
+		position: absolute;
+		top: 4.6rem;
+		left: 10rem;
+	}
+	.search-result-item {
+		color: black;
+		font-weight: 500;
+		font-size: 14px;
+		background-color: white;
+		width: 25rem;
+		padding-top: 1rem;
+		padding-left: 1rem;
+		box-shadow: rgba(0, 0, 0, 0.15) 10px 4px 12px 0px;
+	}
+}
