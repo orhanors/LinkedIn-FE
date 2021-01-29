@@ -59,11 +59,15 @@ class Feed extends React.Component {
           )
 
           //implement DELETE Like here
+
           const likeDeleted = await deleteLike(postId, isPostLiked._id)
+          this.props.changeCounter()
           console.log(likeDeleted)
         } else {
           //addlike here
           const likeAdded = await addLike(postId, this.state.userId)
+          this.props.changeCounter()
+
           console.log(
             "you haven't like this post but now you do. Here you go",
             likeAdded
@@ -71,14 +75,13 @@ class Feed extends React.Component {
         }
       } else {
         const likeAdded = await addLike(postId, this.state.userId)
+        this.props.changeCounter()
+
         console.log("yoy are the first one to like this post", likeAdded)
       }
     } catch (err) {
       console.log(err)
     }
-
-    // const likeAdded = await addLike(postId, this.state.userId)
-    // console.log(likeAdded.likes)
   }
 
   // addLike = async (postId) => {
@@ -133,6 +136,28 @@ class Feed extends React.Component {
     }
   }
 
+  isPostLiked = (postId) => {
+    const post = this.state.posts.find((post) => post._id === postId)
+    if (post.likes && post.likes.length > 0) {
+      console.log("this post has likes", post)
+
+      const isLiked = post.likes.find(
+        (like) => like.userId === this.state.userId.userId
+      )
+
+      if (isLiked) {
+        console.log("post already liked", isLiked)
+        return true
+      } else {
+        console.log("post not liked", isLiked)
+        return false
+      }
+    } else {
+      console.log("post not liked")
+      return false
+    }
+  }
+
   populateFeed = async () => {
     const posts = await fetchPosts()
     console.log("posts data", posts.data)
@@ -140,10 +165,10 @@ class Feed extends React.Component {
       this.setState({ posts: posts.data.reverse(), loading: false })
     }
 
-    const postLikes = posts.data.map((post) => {
-      if (post.likes && post.likes.length > 0) return post.likes.length
-    })
-    console.log("post likes", postLikes)
+    // const postLikes = posts.data.map((post) => {
+    //   if (post.likes && post.likes.length > 0) return post.likes.length
+    // })
+    // console.log("post likes", postLikes)
 
     // if (posts.data.likes && posts.data.likes.length > 0) {
     //   console.log("single post likes", posts.data.likes)
@@ -314,7 +339,9 @@ class Feed extends React.Component {
                         borderRadius: "50%",
 
                         display:
-                          post.likes.length > 0 ? "inline-block" : "none",
+                          post.likes && post.likes.length > 0
+                            ? "inline-block"
+                            : "none",
                         // this.state.like.includes(post._id)
                         //   ? "inline-block"
                         //   : "none",
@@ -334,7 +361,7 @@ class Feed extends React.Component {
                       }
                     >
                       <i className="far fa-thumbs-up"></i>{" "}
-                      {post.likes ? "Unlike" : "Like"}
+                      {this.isPostLiked(post._id) ? "Unlike" : "Like"}
                     </span>
                     <span
                       className="px-3"
@@ -352,7 +379,7 @@ class Feed extends React.Component {
                   <div
                     style={{
                       // display: this.state.comments.includes(post._id)
-                      display: post.likes.length > 0 ? "block" : "none",
+                      display: this.isPostLiked(post._id) ? "block" : "none",
                     }}
                   >
                     <div

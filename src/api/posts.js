@@ -45,7 +45,7 @@ export const deleteLike = async (postId, likeId) => {
       console.log(response.data)
     }
   } catch (error) {
-    console.log("error editing the post", error.response.data)
+    console.log("error deleting the like", error.response.data)
   }
 }
 
