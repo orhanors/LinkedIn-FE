@@ -33,7 +33,9 @@ function AddFriendList(props) {
 				<div className='addFriendList'>
 					<ListGroup>
 						{friendRequestList.length === 0 ? (
-							<ListGroup.Item>
+							<ListGroup.Item
+								className='text-center'
+								style={{ fontWeight: "500", fontSize: "14px" }}>
 								There is no request{" "}
 							</ListGroup.Item>
 						) : (

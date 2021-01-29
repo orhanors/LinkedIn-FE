@@ -4,7 +4,7 @@ import BoxInfo from "../../components/BoxInfo";
 import ProfileStrength from "../../components/ProfileStrength";
 import Dashboard from "../../components/Dashboard";
 import ModalForm from "../../components/ModalForm";
-import Activity from "../../components/Activity";
+
 import ELC from "../../components/ELC";
 import SkillsAndEndorsement from "../../components/SkillsAndEndorsement";
 import Interests from "../../components/Interests";
@@ -101,14 +101,10 @@ class Profile extends React.Component {
 							id={this.state.myProfile._id}
 							me={this.props.me}
 							myProfile={this.state.myProfile}
+							profileChangeCounter={this.state.submitCounter}
 							onClicked={() => {
 								this.setState({ show: true });
 							}}
-							submitCounter={() =>
-								this.setState({
-									submitCounter: this.state.submitCounter + 1,
-								})
-							}
 						/>
 					)}
 					{this.props.me && (
@@ -119,8 +115,6 @@ class Profile extends React.Component {
 						</>
 					)}
 					<>
-						<Activity myProfile={this.state.myProfile} />
-
 						{this.state.showModalExperience && (
 							<ModalExperience
 								id={this.state.myProfile._id}

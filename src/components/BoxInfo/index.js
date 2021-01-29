@@ -23,6 +23,15 @@ class BoxInfo extends React.Component {
 			this.setState({ currentUserFriendList: response.data.friends });
 		}
 	};
+
+	componentDidUpdate(prevProps) {
+		if (
+			prevProps.profileChangeCounter !== this.props.profileChangeCounter
+		) {
+			console.log("box info changed");
+			this.getUser();
+		}
+	}
 	render() {
 		return (
 			<Card>

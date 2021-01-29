@@ -5,6 +5,7 @@ import AddComment from "../AddComment";
 import ModalEditPost from "../ModalEditPost";
 import { fetchPosts } from "../../api/posts";
 import { getLocalStorage } from "../../helpers/localStorage";
+import "./styles.scss";
 
 class Feed extends React.Component {
 	state = {
@@ -62,6 +63,7 @@ class Feed extends React.Component {
 		this.setState({
 			showComment: !this.state.showComment,
 			fetchComment: true,
+			submittedSize: this.state.submittedSize + 1,
 		});
 		if (this.state.comments.includes(id)) {
 			this.setState({
@@ -147,8 +149,8 @@ class Feed extends React.Component {
 										<Col xs={11}>
 											<Media className='p-1'>
 												<img
-													width={64}
-													height={64}
+													width={50}
+													height={50}
 													className='mr-3'
 													src={post?.user?.image}
 													alt='user'
@@ -164,7 +166,8 @@ class Feed extends React.Component {
 													}
 												/>
 												<Media.Body>
-													<h5
+													<p
+														className='post-user-name mt-1'
 														onClick={() =>
 															this.props.history.push(
 																"/profile/" +
@@ -172,23 +175,28 @@ class Feed extends React.Component {
 																		?._id
 															)
 														}>
-														{post?.username}
-													</h5>
+														{post?.user?.name +
+															" " +
+															post?.user?.surname}
+													</p>
 													<h6
 														style={{
 															color: "#b0b0b0",
 															fontSize: "15px",
 														}}>
-														{post?.user?.name +
-															" " +
-															post?.user?.surname}
+														{post?.user?.title}
 													</h6>
 													<h6
 														style={{
 															color: "#b0b0b0",
 															fontSize: "15px",
+															marginTop:
+																"2px !important",
 														}}>
-														{post.createdAt}
+														{post.createdAt.substring(
+															0,
+															10
+														)}
 														<i
 															className='fas fa-globe-americas ml-1'
 															style={{

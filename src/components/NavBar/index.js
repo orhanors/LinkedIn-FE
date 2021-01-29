@@ -199,13 +199,14 @@ class NavBar extends React.Component {
 														}}>
 														<div className='d-flex'>
 															<img
+																className='mr-1'
 																src={
 																	this.state
 																		.myProfile
 																		.image
 																}
 																alt=''
-																width='56px'
+																width='40px'
 															/>
 
 															<div className='pl-1 d-flex flex-column justify-content-center'>

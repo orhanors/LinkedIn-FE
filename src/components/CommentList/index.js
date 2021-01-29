@@ -1,7 +1,9 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { Spinner, Alert } from "react-bootstrap";
-
+import "./styles.scss";
+import { Link } from "react-router-dom";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 class CommentList extends React.Component {
 	state = {
 		comments: [],
@@ -22,7 +24,7 @@ class CommentList extends React.Component {
 				let comments = await response.json();
 				console.log("commentss: ", comments.data.comments);
 				this.setState({
-					comments: comments.data.comments,
+					comments: comments.data.comments.reverse(),
 					isLoading: false,
 				});
 			} else {
@@ -88,53 +90,40 @@ class CommentList extends React.Component {
 									style={{
 										width: 30,
 										height: 30,
+										marginRight: "0.7rem",
 										borderRadius: "50%",
 									}}
-									src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png'
+									src={comment?.userId?.image}
 									alt='comment-user-avatar'
 								/>
-								<ListGroup
+								<div
 									key={index}
 									className='comment-item d-flex justify-content-between mb-3'>
-									<ListGroup.Item className='text-dark d-flex flex-column'>
-										{/*
-										<div>
-											<img
-												className='user-img float-left'
-												src={comment.userId.image}
-												alt='user-avatar'
-											/>
-											<div className='user-info float-left d-flex flex-column'>
-												<Link
-													to={`/profile/${comment.userId._id}`}>
-													<h5 className='ml-0'>
-														{comment.userId.name}{" "}
-														{comment.userId.surname}
-														&middot;{" "}
-														<span>1st</span>
-													</h5>
-												</Link>
-												<p
-													style={{
-														textAlign: "left",
-													}}
-													className='ml-2 '>
-													{comment.userId.title}
+									<div className='d-flex flex-column'>
+										<div className=' d-flex '>
+											<Link
+												to={`/profile/${comment?.userId?._id}`}>
+												<p className='comment-username'>
+													{comment?.userId?.name +
+														" " +
+														comment?.userId
+															?.surname}
 												</p>
-											</div>
+											</Link>
 
-											<div className='mt-1 '>
-												<i className='three-dot float-right fas fa-ellipsis-h'></i>
-											</div>
-                    </div>
-                    */}
+											{/* <MoreHorizIcon className='d-flex float-right' /> */}
+										</div>
+
+										<small className='comment-user-title'>
+											{comment?.userId?.title}
+										</small>
 										<p
 											style={{ textAlign: "left" }}
 											className='float-left'>
-											{comment.comment}
+											{comment?.comment}
 										</p>
-									</ListGroup.Item>
-								</ListGroup>
+									</div>
+								</div>
 							</div>
 						);
 					})}
@@ -148,23 +137,16 @@ class CommentList extends React.Component {
 			body = (
 				<div className='d-flex justify-content-center align-items-center mt-3'></div>
 			);
-		} else if (this.state.errorMessage) {
-			body = (
-				<div className='d-flex justify-content-center align-items-center mt-3'>
-					<Alert variant='danger'>
-						&#9762; Something went wrong!
-					</Alert>
-				</div>
-			);
 		} else {
 			body = (
-				<Spinner
-					className='comment-spinner'
-					animation='grow'
-					variant='primary'
-				/>
+				<div className='d-flex justify-content-center align-items-center mt-3'>
+					{/* <p style={{ color: "red" }} variant='danger'>
+						Something went wrong!
+					</p> */}
+				</div>
 			);
 		}
+
 		return body;
 	}
 }
