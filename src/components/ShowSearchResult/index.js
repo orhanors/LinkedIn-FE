@@ -1,5 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+import onClickOutside from "react-onclickoutside";
 
 import { Link } from "react-router-dom";
 import "./styles.scss";
