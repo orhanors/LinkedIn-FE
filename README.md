@@ -1,6 +1,6 @@
 ### LinkedIn Web Clone
 
-Project background details can be found [here](https://github.com/orhanors/LinkedIn-BE) in backend part of this project.
+Project background details can be found [here](https://github.com/orhanors/LinkedIn-BE/) in backend part of this project.
 
 Features
 
