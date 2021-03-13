@@ -14,6 +14,26 @@ Features
 </a>
 </details>
 
+<details>
+<summary><b> Create a new post </b></summary>
+  </br>
+  <p> You can create a new post with and image and description </p>
+  </br>
+    <a href="https://github.com/orhanors/LinkedIn-FE/blob/master/screenshots/l-newpost.png">
+  <img alt="app" src="https://github.com/orhanors/LinkedIn-FE/blob/master/screenshots/l-newpost.png" />
+</a>
+</details>
+
+<details>
+<summary><b> Like and make comments on posts </b></summary>
+  </br>
+  <p> Most of the component rendered conditionally. You have to login to see pages. </p>
+  </br>
+    <a href="https://github.com/orhanors/LinkedIn-FE/blob/master/screenshots/l-reaction.png">
+  <img alt="app" src="https://github.com/orhanors/LinkedIn-FE/blob/master/screenshots/l-reaction.png" />
+</a>
+</details>
+
 
 <details>
 <summary><b> Search for available users </b></summary>
@@ -38,7 +58,7 @@ Features
 <details>
 <summary><b> Send friend request and receive notification </b></summary>
   </br>
-  We didn't use websockets to implement notification. But you'll like the idea behind it. Check out from [here](https://github.com/orhanors/LinkedIn-BE) how we manage it
+We didn't use websockets to implement notification. But you'll like the idea behind it. Check out from <a href="https://github.com/orhanors/LinkedIn-BE">here </a>here to  see how we managed it
   </br>
     <a href="https://github.com/orhanors/LinkedIn-FE/blob/master/screenshots/l-friend.png">
   <img alt="app" src="https://github.com/orhanors/LinkedIn-FE/blob/master/screenshots/l-friend.png" />
