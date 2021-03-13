@@ -31,8 +31,8 @@ function Message(props) {
 		socket.on("bmsg", (msg) =>
 			setMessages((messages) => messages.concat(msg))
 		);
-
 		socket.on("connect", () => console.log("Connected to socket"));
+		socket.emit("setUsername", { username: userId });
 	}, []);
 
 	const handleMessage = (e) => {
@@ -46,8 +46,8 @@ function Message(props) {
 				user: userId,
 				message: message,
 			});
-			socket.emit("setUsername", { username: userId });
-			socket.emit("list", {});
+
+			//socket.emit("list", {});
 			socket.emit("chatmessage", {
 				to: chatUserId,
 				text: e.target.value,
