@@ -2,7 +2,9 @@
 
 Project background details can be found [here](https://github.com/orhanors/LinkedIn-BE/) in backend part of this project.
 
-Features
+You can enjoy with [LIVE DEMO](https://linked-in-clone-j9nup2l5r-orhanors.vercel.app/)
+
+### Features
 
 <details>
 <summary><b> Create an account and login </b></summary>
