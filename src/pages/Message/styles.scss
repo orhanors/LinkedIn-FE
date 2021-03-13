@@ -1,0 +1,14 @@
+.msg-container {
+	background-color: white;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	border-radius: 10px;
+
+	.msg-user {
+		padding: 2rem;
+		&:hover {
+			cursor: pointer;
+			background-color: rgb(209, 209, 209);
+		}
+	}
+}

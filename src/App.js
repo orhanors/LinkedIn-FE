@@ -12,6 +12,7 @@ import "./App.css";
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 import { getCurrentUser } from "./api/profile";
 import { getLocalStorage } from "./helpers/localStorage";
+import Message from "./pages/Message";
 
 function App() {
 	const [me, setMe] = React.useState(null);
@@ -38,6 +39,7 @@ function App() {
 						/>
 					</Row>
 				</Container>
+				<ProtectedRoute path='/messages' exact component={Message} />
 				<ProtectedRoute path='/' exact component={Home} />
 				<Route path='/auth/signup' exact component={Signup} />
 				<Route

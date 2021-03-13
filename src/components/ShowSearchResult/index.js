@@ -20,7 +20,7 @@ class ShowSearchResult extends React.Component {
 	}
 	render() {
 		const { users } = this.props;
-		console.log("searched", users);
+
 		return (
 			//     <Button variant="primary" onClick={handleShow}>
 			//     Launch demo modal
